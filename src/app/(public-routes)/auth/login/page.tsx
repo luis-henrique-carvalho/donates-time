@@ -24,7 +24,7 @@ export default function Home() {
             return
         }
 
-        router.replace('/admin')
+        router.replace('/')
     }
 
     return (

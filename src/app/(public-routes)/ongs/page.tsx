@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth"
 import Link from "next/link"
 
 
-export default async function Admin() {
+export default async function Ongs() {
     const session = await getServerSession(nextAuthOptions)
 
     return (

@@ -1,31 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const PROTECTED_API_ROUTES = [""];
-const PROTECTED_ROUTES = ["/dashboard"];
+const PRIVATE_ROUTES = ["/ongs/create"];
 
 export async function middleware(request: NextRequest) {
-  const isProtectedApiRoute = PROTECTED_API_ROUTES.some((route: string) =>
+  const isProtectedRoute = PRIVATE_ROUTES.some((route: string) =>
     request.nextUrl?.pathname?.startsWith(route)
   );
-  const isProtectedRoute = PROTECTED_ROUTES.some((route: string) =>
-    request.nextUrl?.pathname?.startsWith(route)
-  );
-
-  if (isProtectedApiRoute) {
-    const isAuth = await isAuthenticated(request);
-    if (!isAuth) {
-      return Response.json(
-        { success: false, message: "Authentication failed" },
-        { status: 401 }
-      );
-    }
-  }
 
   if (isProtectedRoute) {
     const isAuth = await isAuthenticated(request);
+    console.log("isAuth", isAuth);
     if (!isAuth) {
-      console.log("Redirecting to login page");
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

@@ -43,7 +43,8 @@ const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/",
+    signIn: "/auth/login",
+    newUser: "/auth/register",
   },
   callbacks: {
     async jwt({ token, user }) {
