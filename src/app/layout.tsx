@@ -33,7 +33,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <SiteHeader />
-            {children}
+            <div className="container h-14 max-w-screen-2xl items-center">
+              {children}
+            </div>
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>

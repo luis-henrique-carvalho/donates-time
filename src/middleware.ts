@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
     const isAuth = await isAuthenticated(request);
     console.log("isAuth", isAuth);
     if (!isAuth) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/auth/login", request.url));
     }
   }
 
