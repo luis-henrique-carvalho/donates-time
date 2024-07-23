@@ -1,5 +1,5 @@
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route"
-import ButtonLogout from "@/components/ButtonLogout"
+import nextAuthOptions from "@/nextAuthOptions"
+import ButtonLogout from "@/components/molecules/ButtonLogout"
 import { getServerSession } from "next-auth"
 import Link from "next/link"
 

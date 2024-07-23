@@ -2,7 +2,8 @@ import "@/styles/globals.css"
 import { Inter as FontSans } from "next/font/google"
 
 import { cn } from "@/lib/utils"
-import NextAuthSessionProvider from "@/providers/sessionProvider";
+import NextAuthSessionProvider from "@/providers/SessionProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import SiteHeader from "@/components/layout/SiteHeader";
 
 interface RootLayoutProps {
@@ -25,10 +26,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
       >
         <NextAuthSessionProvider>
-          <SiteHeader />
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SiteHeader />
+            {children}
+          </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
-    </html>
+    </html >
   )
 }
