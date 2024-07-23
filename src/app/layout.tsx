@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 import NextAuthSessionProvider from "@/providers/sessionProvider";
+import SiteHeader from "@/components/layout/SiteHeader";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable
         )}
       >
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+        <NextAuthSessionProvider>
+          <SiteHeader />
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html>
   )
