@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { configRoutes } from "./config/routes";
 
-const PRIVATE_ROUTES = ["/ongs/create"];
+const PRIVATE_ROUTES = configRoutes.privateRoutes.map((route) => route.href);
 
 export async function middleware(request: NextRequest) {
   const isProtectedRoute = PRIVATE_ROUTES.some((route: string) =>
