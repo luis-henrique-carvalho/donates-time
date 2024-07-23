@@ -6,7 +6,7 @@ import MobileNav from './MobileNav'
 import ThemeToggle from '../molecules/ThemeToggle'
 import Link from 'next/link'
 import { useSession } from "next-auth/react";
-import ButtonLogout from '../molecules/ButtonLogout'
+import UserNav from '@/components/molecules/UserNav'
 
 type Props = {}
 
@@ -19,11 +19,11 @@ const SiteHeader: React.FC<Props> = () => {
                 <MainNav />
                 <MobileNav />
                 <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-                    <nav className="flex items-center">
+                    <nav className="ml-auto flex items-center space-x-4">
                         {session ? (
-                            <ButtonLogout />
+                            <UserNav session={session} />
                         ) : (
-                            <div>
+                            <div className='flex items-center space-x-4'>
                                 <Link href="/auth/login">
                                     <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Sign in</span>
                                 </Link>
