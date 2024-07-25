@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import NextAuthSessionProvider from "@/providers/SessionProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import SiteHeader from "@/components/layout/SiteHeader";
+import Container from "@/components/layout/Container";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -33,9 +34,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <SiteHeader />
-            <div className="container h-14 max-w-screen-2xl items-center">
+            <Container>
               {children}
-            </div>
+            </Container>
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
