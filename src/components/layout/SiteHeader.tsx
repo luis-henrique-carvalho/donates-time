@@ -24,11 +24,11 @@ const SiteHeader: React.FC<Props> = () => {
                             <UserNav session={session} />
                         ) : (
                             <div className='flex items-center space-x-4'>
-                                <Link href="/auth/login">
+                                <Link href="/login">
                                     <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Sign in</span>
                                 </Link>
 
-                                <Link href="/auth/register">
+                                <Link href="/register">
                                     <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Register</span>
                                 </Link>
                             </div>

@@ -7,7 +7,6 @@ interface PrivateLayoutProps {
 export default async function PrivateLayout({ children }: PrivateLayoutProps) {
     return (
         <>
-            <h1>PrivateLayout</h1>
             {children}
         </>
     )

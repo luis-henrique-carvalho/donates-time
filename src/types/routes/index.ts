@@ -6,5 +6,6 @@ interface Route {
 export interface ConfigRoutes {
   publicRoutes: Route[];
   privateRoutes: Route[];
+  authRotes: Route[];
   navMenuRoutes: Route[];
 }

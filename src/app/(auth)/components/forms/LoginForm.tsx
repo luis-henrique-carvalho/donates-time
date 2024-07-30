@@ -14,30 +14,29 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { LoginSchema } from "@/schemas/auth"
 import Link from "next/link"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { signInFormData, signInSchema } from "../../schemas"
+import { useState } from "react"
 
 
 export function LoginForm() {
+    const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-        },
+    const form = useForm<signInFormData>({
+        resolver: zodResolver(signInSchema),
     })
 
-    async function onSubmit(data: z.infer<typeof LoginSchema>) {
+    async function onSubmit(data: z.infer<typeof signInSchema>) {
+        setIsLoading(true)
         const result = await signIn("credentials", {
             email: data.email,
             password: data.password,
             redirect: false,
         })
-
+        setIsLoading(false)
         if (result?.error) {
             console.error(result.error)
             return
@@ -83,8 +82,8 @@ export function LoginForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full" type="submit">
-                    Submit
+                <Button className="w-full" type="submit" disabled={isLoading}>
+                    {isLoading ? "Loading..." : "Submit"}
                 </Button>
                 <Button variant="outline" className="w-full">
                     Login with Google
