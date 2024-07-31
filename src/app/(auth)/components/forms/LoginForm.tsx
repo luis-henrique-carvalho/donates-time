@@ -72,7 +72,7 @@ export function LoginForm() {
                         <FormItem>
                             <FormLabel>E-mail</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                                <Input placeholder="Digite seu E-mail" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -94,7 +94,7 @@ export function LoginForm() {
                                 </Link>
                             </div>
                             <FormControl>
-                                <Input type="password" {...field} />
+                                <Input type="password" placeholder="Digite seu Password" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
