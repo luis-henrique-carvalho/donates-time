@@ -14,7 +14,7 @@ const SiteHeader: React.FC<Props> = () => {
     const { data: session } = useSession()
 
     return (
-        <header className="sticky top-0 z-50 w-full">
+        <header className="sticky top-0 px-5 z-50 w-full">
             <div className="container flex h-14 max-w-screen-2xl items-center">
                 <MainNav />
                 <MobileNav />
