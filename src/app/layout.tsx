@@ -6,6 +6,7 @@ import NextAuthSessionProvider from "@/providers/SessionProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import SiteHeader from "@/components/layout/SiteHeader";
 import Container from "@/components/layout/Container";
+import { Toaster } from "@/components/ui/toaster";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Container>
               {children}
             </Container>
+            <Toaster />
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>

@@ -1,13 +1,13 @@
 "use client"
 // Flow
-import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 // Schemas
-import { signInFormData, signInSchema } from "../../schemas"
+import { signUpFormData, signUpSchema } from "../../schemas"
 // Components
-import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
     Form,
     FormControl,
@@ -16,39 +16,35 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 // Hooks
-import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
+import { signIn } from "next-auth/react"
+// Actions
+import { signUpAction } from "../../actions"
 
-export function LoginForm() {
+export function RegisterForm() {
     const [isLoading, setIsLoading] = useState(false)
     const { toast } = useToast()
     const router = useRouter()
 
-    const form = useForm<signInFormData>({
-        resolver: zodResolver(signInSchema),
+    const form = useForm<signUpFormData>({
+        resolver: zodResolver(signUpSchema),
     })
 
-    async function onSubmit(data: z.infer<typeof signInSchema>) {
+    async function onSubmit(data: z.infer<typeof signUpSchema>) {
         setIsLoading(true)
 
-        const result = await signIn("credentials", {
-            email: data.email,
-            password: data.password,
-            redirect: false,
-        })
+        const result = await signUpAction(data)
 
         setIsLoading(false)
 
         if (result?.error) {
-            console.error(result.error)
             toast({
                 variant: "destructive",
                 title: "Error",
-                description: "Invalid email or password",
+                description: result.error || "Invalid email or password",
             })
             return
         }
@@ -56,10 +52,20 @@ export function LoginForm() {
         toast({
             variant: "primary",
             title: "Success",
-            description: "You have successfully logged in",
+            description: "Account created successfully",
         })
 
-        router.replace("/")
+        setIsLoading(true)
+
+        await signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            redirect: false,
+        })
+
+        setIsLoading(false)
+
+        router.push("/")
     }
 
     return (
@@ -84,15 +90,7 @@ export function LoginForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <div className="flex w-full justify-between">
-                                <FormLabel>Password</FormLabel>
-                                <Link
-                                    href="/forgot-password"
-                                    className="ml-auto inline-block text-sm underline"
-                                >
-                                    Forgot your password?
-                                </Link>
-                            </div>
+                            <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input type="password" {...field} />
                             </FormControl>
@@ -100,13 +98,28 @@ export function LoginForm() {
                         </FormItem>
                     )}
                 />
+
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input type="name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
                 <Button className="w-full" type="submit" disabled={isLoading}>
-                    {isLoading ? "Loading..." : "Login"}
+                    {isLoading ? "Loading..." : "Create an account"}
                 </Button>
                 <Button variant="outline" className="w-full">
                     Login with Google
                 </Button>
             </form>
-        </Form>
+        </Form >
     )
 }
