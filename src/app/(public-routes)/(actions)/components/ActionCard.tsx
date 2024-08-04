@@ -20,6 +20,7 @@ import { FaCalendarAlt, FaCalendarTimes } from "react-icons/fa";
 import { format } from 'date-fns';
 // Next
 import Link from 'next/link';
+import CreateVolunteerButton from '@/app/(private-routes)/(volunteers)/components/CreateVolunteerButton';
 
 type Props = {
     action: IAction;
@@ -83,11 +84,7 @@ const ActionCard = ({ action, variant = 'default' }: Props) => {
                     </div>
 
                     <div className='flex gap-2'>
-                        <Button asChild>
-                            <Link href={`/subscribe/${action.id}`}>
-                                Inscrevas-se
-                            </Link>
-                        </Button>
+                        <CreateVolunteerButton action_id={action.id} />
                     </div>
                 </CardFooter>
             </article>
