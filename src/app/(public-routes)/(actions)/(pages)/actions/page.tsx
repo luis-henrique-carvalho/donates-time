@@ -13,8 +13,8 @@ const Actions = () => {
         setActionSearch,
         actionError,
         setActionPage,
-        actionPagination }
-        = useActionStore();
+        actionPagination
+    } = useActionStore();
 
     React.useEffect(() => {
         getActions();
@@ -31,7 +31,7 @@ const Actions = () => {
     }
 
     return (
-        <div>
+        <div className='flex flex-1 min-h-[95%] bg-muted/40 flex-col gap-4 p-4 md:gap-8 md:p-8'>
             <Input
                 value={actionSearch}
                 onChange={(e) => {
@@ -48,16 +48,16 @@ const Actions = () => {
                             <div key={action.id}>{action.attributes.title}</div>
                         ))}
                     </div>
-
-                    {actionPagination && (
-                        <PaginationComponent
-                            currentPage={actionPagination.page}
-                            totalPages={actionPagination.pages}
-                            handlePageChange={handlePageChange}
-                            series={actionPagination.series}
-                        />
-                    )}
                 </div>
+
+            )}
+            {actionPagination && (
+                <PaginationComponent
+                    currentPage={actionPagination.page}
+                    totalPages={actionPagination.pages}
+                    handlePageChange={handlePageChange}
+                    series={actionPagination.series}
+                />
             )}
         </div>
     );

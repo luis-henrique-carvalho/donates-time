@@ -21,15 +21,12 @@ const PaginationComponent: React.FC<PaginationProps> = ({
     handlePageChange,
     series
 }) => {
-    const maxPagesToShow = 3; // Número máximo de páginas visíveis ao redor da página atual
-    const seriesNumbers = series.map(item => Number(item));
+    const maxPagesToShow = 3;
 
-    // Determine os limites da série de páginas a serem exibidas
     const getVisiblePages = () => {
         const start = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
         const end = Math.min(totalPages, currentPage + Math.floor(maxPagesToShow / 2));
 
-        // Ajusta para garantir que sempre mostre o número correto de páginas
         const pages = [];
         for (let i = start; i <= end; i++) {
             pages.push(i);
@@ -45,7 +42,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 {currentPage > 1 && (
                     <PaginationItem>
                         <PaginationPrevious
-                            href="#"
                             onClick={() => handlePageChange(currentPage - 1)}
                         />
                     </PaginationItem>
@@ -54,7 +50,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                     <>
                         <PaginationItem>
                             <PaginationLink
-                                href="#"
                                 onClick={() => handlePageChange(1)}
                             >
                                 First
@@ -63,7 +58,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                         {visiblePages[0] > 2 && (
                             <PaginationItem>
                                 <PaginationLink
-                                    href="#"
                                     onClick={() => handlePageChange(visiblePages[0] - 1)}
                                 >
                                     ...
@@ -75,9 +69,8 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 {visiblePages.map(page => (
                     <PaginationItem key={page}>
                         <PaginationLink
-                            href="#"
                             onClick={() => handlePageChange(page)}
-                            className={currentPage === page ? 'bg-primary' : ''}
+                            isActive={currentPage === page}
                         >
                             {page}
                         </PaginationLink>
@@ -88,7 +81,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                         {visiblePages[visiblePages.length - 1] < totalPages - 1 && (
                             <PaginationItem>
                                 <PaginationLink
-                                    href="#"
                                     onClick={() => handlePageChange(visiblePages[visiblePages.length - 1] + 1)}
                                 >
                                     ...
@@ -97,7 +89,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                         )}
                         <PaginationItem>
                             <PaginationLink
-                                href="#"
                                 onClick={() => handlePageChange(totalPages)}
                             >
                                 Last
@@ -108,7 +99,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 {currentPage < totalPages && (
                     <PaginationItem>
                         <PaginationNext
-                            href="#"
                             onClick={() => handlePageChange(currentPage + 1)}
                         />
                     </PaginationItem>
