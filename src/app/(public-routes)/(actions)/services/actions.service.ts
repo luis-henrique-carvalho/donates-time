@@ -1,5 +1,5 @@
 import { api } from "@/services/api.service";
-import { IActionResponse } from "../types";
+import { IActionResponse, IActionResponseUnique } from "../types";
 
 export class ActionService {
   static async getActions(
@@ -16,12 +16,23 @@ export class ActionService {
         },
       });
       return response.data;
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Get Actions Error:", error.message);
-        return { error: error.message || "An error occurred" };
-      }
-      return { error: "An unknown error occurred" };
+    } catch (error: any) {
+      return {
+        error: error.response.data.errors || "An error occurred",
+      };
+    }
+  }
+
+  static async getActionById(
+    action_id: string
+  ): Promise<IActionResponseUnique | { error: string }> {
+    try {
+      const response = await api.get(`api/v1/actions/${action_id}`);
+      return response.data;
+    } catch (error: any) {
+      return {
+        error: error.response.data.errors || "An error occurred",
+      };
     }
   }
 }

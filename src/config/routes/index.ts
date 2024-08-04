@@ -5,6 +5,7 @@ export const configRoutes: ConfigRoutes = {
     { title: "Home", href: "/" },
     { title: "Ongs", href: "/ongs" },
     { title: "Actions", href: "/actions" },
+    { title: "Action Details", href: "/actions/[id]" },
     { title: "Volunteers", href: "/volunteers" },
   ],
   authRotes: [

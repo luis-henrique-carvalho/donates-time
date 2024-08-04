@@ -1,1 +1,6 @@
-export type { IAction, IActionResponse } from "./Action";
+export type {
+  IAction,
+  IActionResponse,
+  IActionResponseUnique,
+  IActionStatus,
+} from "./Action";

@@ -1,4 +1,7 @@
+import { IActionResponse } from "./Action.d";
 import { IPagination } from "@/types/Pagination";
+
+export type IActionStatus = "pending" | "active" | "completed" | "canceled";
 
 export interface IActionAttributes {
   id: string;
@@ -6,7 +9,7 @@ export interface IActionAttributes {
   description: string;
   start_date: string;
   end_date: string;
-  status: "pending" | "active" | "completed" | "canceled";
+  status: IActionStatus;
   max_volunteers: number;
   category: string;
   ong_id: string;
@@ -28,4 +31,8 @@ export interface IAction {
 export interface IActionResponse {
   data: IAction[];
   pagy: IPagination;
+}
+
+export interface IActionResponseUnique {
+  data: IAction;
 }

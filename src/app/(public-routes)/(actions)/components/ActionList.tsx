@@ -34,7 +34,7 @@ const ActionList = () => {
     }
 
     return (
-        <div className='flex flex-col flex-grow bg-muted/40'>
+        <React.Fragment>
             <div className='flex-grow flex flex-col gap-4'>
                 <Input
                     value={actionSearch}
@@ -64,7 +64,7 @@ const ActionList = () => {
                     />
                 )}
             </div>
-        </div>
+        </React.Fragment>
     );
 };
 

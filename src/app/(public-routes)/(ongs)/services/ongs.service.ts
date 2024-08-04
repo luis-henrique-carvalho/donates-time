@@ -8,8 +8,9 @@ export class OngService {
       const response = await api.get("api/v1/ongs");
       return response.data;
     } catch (error: any) {
-      console.error("Get Ongs Error:", error.message);
-      return { error: error.message || "An error occurred" };
+      return {
+        error: error.response.data.errors || "An error occurred",
+      };
     }
   }
 }
