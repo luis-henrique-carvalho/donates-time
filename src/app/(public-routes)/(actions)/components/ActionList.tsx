@@ -34,7 +34,7 @@ const ActionList = () => {
     }
 
     return (
-        <div className='flex flex-col flex-grow bg-muted/40 gap-4 p-4 md:gap-8 md:p-8'>
+        <div className='flex flex-col flex-grow bg-muted/40'>
             <div className='flex-grow flex flex-col gap-4'>
                 <Input
                     value={actionSearch}
