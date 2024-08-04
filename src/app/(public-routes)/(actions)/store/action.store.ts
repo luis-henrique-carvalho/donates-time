@@ -1,7 +1,9 @@
 import { create } from "zustand";
-import { IAction } from "../types";
-import { fetchActions } from "../actions";
+// Types
 import { IPagination } from "@/types/Pagination";
+import { IAction } from "../types";
+// Services
+import { fetchActions } from "../actions";
 
 interface ActionStoreState {
   actions: IAction[];
@@ -14,6 +16,7 @@ interface ActionStoreState {
 
 interface ActionStoreActions {
   getActions: () => void;
+  setActions: (actions: IAction[]) => void;
   setActionSearch: (search: string) => void;
   setActionPage: (page: number) => void;
 }
@@ -46,7 +49,9 @@ export const useActionStore = create<ActionStoreState & ActionStoreActions>(
         set({ isLoadingActions: false });
       }
     },
-    setActionSearch: (search: string) => set({ actionSearch: search }),
+    setActions: (actions: IAction[]) => set({ actions }),
+    setActionSearch: (search: string) =>
+      set({ actionSearch: search, actionPage: 1 }),
     setActionPage: (page: number) => set({ actionPage: page }),
   })
 );
