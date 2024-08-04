@@ -11,11 +11,9 @@ import {
 } from "@/components/ui/card"
 
 import { IOng } from '../types';
-import Link from 'next/link';
 import { Check } from "lucide-react"
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-
 
 type Props = {
     ong: IOng;
@@ -25,13 +23,13 @@ const OngCard = ({ ong }: Props) => {
     const formattedDate = format(new Date(ong.attributes.created_at), 'dd MMMM yyyy');
 
     return (
-        <Card>
+        <Card className='flex flex-col justify-between'>
             <CardHeader>
                 <CardTitle>{ong.attributes.name}</CardTitle>
                 <CardDescription> <span className='font-bold text-primary'>Categoria:</span> {ong.attributes.category}</CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className=" flex items-center space-x-4 rounded-md border p-4">
+            <CardContent className="h-4/5">
+                <div className=" flex items-center space-x-4 rounded-md border p-4 h-full">
                     <div className="flex-1 space-y-2">
                         <h3 className="font-bold text-primary text-center">
                             Descrição

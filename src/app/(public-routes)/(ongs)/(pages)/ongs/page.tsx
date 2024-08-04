@@ -12,7 +12,6 @@ const OngsPage = async () => {
         console.error(response.error);
         return (
             <main>
-                <h1>Ongs</h1>
                 <div>
                     <p>Error fetching ONGs: {response.error}</p>
                 </div>
@@ -25,7 +24,7 @@ const OngsPage = async () => {
     console.log(ongs);
 
     return (
-        <main className='flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8'>
+        <main className='flex flex-1 bg-muted/40 flex-col gap-4 p-4 md:gap-8 md:p-8'>
             <h1 className='heading-1'>Ongs</h1>
             <div>
                 <OngList ongs={ongs.data} />
