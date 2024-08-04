@@ -5,15 +5,16 @@ import { configRoutes } from "./config/routes";
 const PRIVATE_ROUTES = configRoutes.privateRoutes.map((route) => route.href);
 
 export async function middleware(request: NextRequest) {
-  const isProtectedRoute = PRIVATE_ROUTES.some((route: string) =>
-    request.nextUrl?.pathname?.startsWith(route)
-  );
+  const isProtectedRoute = PRIVATE_ROUTES.some((route: string) => {
+    const regex = new RegExp(`^${route.replace(/\[.*?\]/g, ".*")}$`);
+    return regex.test(request.nextUrl.pathname);
+  });
 
   if (isProtectedRoute) {
     const isAuth = await isAuthenticated(request);
     console.log("isAuth", isAuth);
     if (!isAuth) {
-      return NextResponse.redirect(new URL("/auth/login", request.url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 
