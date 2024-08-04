@@ -33,7 +33,7 @@ const ActionDetails = async ({ params }: { params: { action_id: string } }) => {
                     className="rounded-md object-cover"
                 />
             </AspectRatio>
-            <ActionCard action={action} variant='simple' />
+            <ActionCard action={action} variant='show' />
         </main>
 
     )

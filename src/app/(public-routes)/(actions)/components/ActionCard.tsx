@@ -24,11 +24,12 @@ import CreateVolunteerButton from '@/app/(private-routes)/(volunteers)/component
 
 type Props = {
     action: IAction;
-    variant?: 'default' | 'simple'
+    variant?: 'default' | 'show'
 }
 
 const ActionCard = ({ action, variant = 'default' }: Props) => {
     const { title, status, ong, start_date, end_date, max_volunteers, volunteers_count, category, description } = action.attributes;
+    const isPageShow = variant === 'show';
 
     const formattedStartDate = start_date ? format(new Date(start_date), "dd/MM/yyyy 'às' HH'hrs'") : 'N/A';
     const formattedEndDate = end_date ? format(new Date(end_date), "dd/MM/yyyy 'às' HH'hrs'") : 'N/A';
@@ -39,13 +40,13 @@ const ActionCard = ({ action, variant = 'default' }: Props) => {
             <article>
                 <CardHeader className='flex flex-col gap-4'>
                     <header className='flex flex-col gap-3'>
-                        <CardTitle className='text-lg font-semibold'>{title}</CardTitle>
+                        <CardTitle className={` ${isPageShow ? 'text-2xl' : 'text-lg'} font-semibold`}>{title}</CardTitle>
                         <div className='flex flex-row justify-between items-center'>
                             <p><span className='font-semibold'>Categoria:</span> {category}</p>
-                            <Badge variant={status} className='text-sm'>{status}</Badge>
+                            <Badge variant={status} className='text-md'>{status}</Badge>
                         </div>
                     </header>
-                    <section className='flex flex-col gap-2 text-sm'>
+                    <section className={`flex flex-col gap-2 ${isPageShow ? 'text-base' : 'text-sm'}`}>
                         <div className='flex items-center gap-2'>
                             <CgProfile className='text-primary' /> <span className='font-semibold'>ONG:</span> {ong.name}
                         </div>
@@ -88,7 +89,7 @@ const ActionCard = ({ action, variant = 'default' }: Props) => {
                     </div>
                 </CardFooter>
             </article>
-        </Card>
+        </Card >
     );
 }
 
