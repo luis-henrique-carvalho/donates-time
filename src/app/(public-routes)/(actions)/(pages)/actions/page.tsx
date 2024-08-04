@@ -1,28 +1,66 @@
-import React from 'react'
-import { fetchActions } from '../../actions';
-import { IActionResponse } from '../../types';
+"use client"
+import React from 'react';
+import { useActionStore } from '../../store/action.store';
+import { Input } from '@/components/ui/input';
+import PaginationComponent from '@/components/molecules/Pagination';
 
-const Actions = async () => {
-    const response = await fetchActions();
+const Actions = () => {
+    const { actions,
+        isLoadingActions,
+        getActions,
+        actionPage,
+        actionSearch,
+        setActionSearch,
+        actionError,
+        setActionPage,
+        actionPagination }
+        = useActionStore();
 
-    if ('error' in response) {
-        console.error(response.error);
-        return (
-            <main>
-                <div>
-                    <p>Error fetching actions: {response.error}</p>
-                </div>
-            </main>
-        );
+    React.useEffect(() => {
+        getActions();
+    }, [actionPage, actionSearch]);
+
+    console.log(actionPagination)
+
+    const handlePageChange = (page: number) => {
+        setActionPage(page);
     }
 
-    const actions: IActionResponse = response;
-
-    console.log(actions);
+    if (actionError) {
+        return <div>Error: {actionError}</div>;
+    }
 
     return (
-        <div>Actions</div>
-    )
+        <div>
+            <Input
+                value={actionSearch}
+                onChange={(e) => {
+                    e.preventDefault();
+                    setActionSearch(e.target.value);
+                }}
+            />
+            {isLoadingActions ? (
+                <div>Loading...</div>
+            ) : (
+                <div className='flex flex-col gap-4'>
+                    <div>
+                        {actions.map((action) => (
+                            <div key={action.id}>{action.attributes.title}</div>
+                        ))}
+                    </div>
+
+                    {actionPagination && (
+                        <PaginationComponent
+                            currentPage={actionPagination.page}
+                            totalPages={actionPagination.pages}
+                            handlePageChange={handlePageChange}
+                            series={actionPagination.series}
+                        />
+                    )}
+                </div>
+            )}
+        </div>
+    );
 }
 
-export default Actions
+export default Actions;

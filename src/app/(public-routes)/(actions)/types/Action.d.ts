@@ -1,3 +1,5 @@
+import { IPagination } from "@/types/Pagination";
+
 export interface IActionAttributes {
   id: string;
   title: string;
@@ -19,4 +21,5 @@ export interface IAction {
 
 export interface IActionResponse {
   data: IAction[];
+  pagy: IPagination;
 }
