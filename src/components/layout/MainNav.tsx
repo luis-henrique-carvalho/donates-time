@@ -2,12 +2,10 @@ import Link from 'next/link';
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import React from 'react';
 // Config
