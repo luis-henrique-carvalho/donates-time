@@ -43,11 +43,11 @@ export default function Págination({ pagy }: PaginationProps) {
     return (
         <Pagination>
             <PaginationContent>
-                {currentPage > 1 && (
-                    <PaginationItem>
-                        <PaginationPrevious onClick={() => currentPage > 1 && navigateToPage(currentPage - 1)} />
-                    </PaginationItem>
-                )}
+
+                <PaginationItem>
+                    <PaginationPrevious onClick={() => currentPage > 1 && navigateToPage(currentPage - 1)} isActive={currentPage > 1} />
+                </PaginationItem>
+
                 {visiblePages[0] > 1 && (
                     <>
                         <PaginationItem>
@@ -87,11 +87,11 @@ export default function Págination({ pagy }: PaginationProps) {
                         </PaginationItem>
                     </>
                 )}
-                {currentPage < totalPages && (
-                    <PaginationItem>
-                        <PaginationNext onClick={() => currentPage < totalPages && navigateToPage(currentPage + 1)} />
-                    </PaginationItem>
-                )}
+
+                <PaginationItem>
+                    <PaginationNext onClick={() => currentPage < totalPages && navigateToPage(currentPage + 1)} isActive={currentPage < totalPages} />
+                </PaginationItem>
+
             </PaginationContent>
         </Pagination>
     );
