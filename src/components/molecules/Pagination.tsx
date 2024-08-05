@@ -1,27 +1,31 @@
-import React from 'react';
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
+'use client';
+
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { IPagination } from '@/types/Pagination';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 interface PaginationProps {
-    currentPage: number;
-    totalPages: number;
-    handlePageChange: (page: number) => void;
-    series: (string | number)[];
+    pagy: IPagination;
 }
 
-const PaginationComponent: React.FC<PaginationProps> = ({
-    currentPage,
-    totalPages,
-    handlePageChange,
-    series
-}) => {
+export default function Págination({ pagy }: PaginationProps) {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const currentPage = Number(searchParams.get('page')) || 1;
+
     const maxPagesToShow = 3;
+    const { pages: totalPages } = pagy;
+
+    const createPageURL = (pageNumber: number | string) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('page', pageNumber.toString());
+        return `${pathname}?${params.toString()}`;
+    };
+
+    const navigateToPage = (pageNumber: number | string) => {
+        router.push(createPageURL(pageNumber));
+    };
 
     const getVisiblePages = () => {
         const start = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
@@ -41,25 +45,19 @@ const PaginationComponent: React.FC<PaginationProps> = ({
             <PaginationContent>
                 {currentPage > 1 && (
                     <PaginationItem>
-                        <PaginationPrevious
-                            onClick={() => handlePageChange(currentPage - 1)}
-                        />
+                        <PaginationPrevious onClick={() => currentPage > 1 && navigateToPage(currentPage - 1)} />
                     </PaginationItem>
                 )}
                 {visiblePages[0] > 1 && (
                     <>
                         <PaginationItem>
-                            <PaginationLink
-                                onClick={() => handlePageChange(1)}
-                            >
+                            <PaginationLink onClick={() => navigateToPage(1)}>
                                 First
                             </PaginationLink>
                         </PaginationItem>
                         {visiblePages[0] > 2 && (
                             <PaginationItem>
-                                <PaginationLink
-                                    onClick={() => handlePageChange(visiblePages[0] - 1)}
-                                >
+                                <PaginationLink onClick={() => navigateToPage(visiblePages[0] - 1)}>
                                     ...
                                 </PaginationLink>
                             </PaginationItem>
@@ -68,10 +66,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 )}
                 {visiblePages.map(page => (
                     <PaginationItem key={page}>
-                        <PaginationLink
-                            onClick={() => handlePageChange(page)}
-                            isActive={currentPage === page}
-                        >
+                        <PaginationLink onClick={() => navigateToPage(page)} isActive={currentPage === page}>
                             {page}
                         </PaginationLink>
                     </PaginationItem>
@@ -80,17 +75,13 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                     <>
                         {visiblePages[visiblePages.length - 1] < totalPages - 1 && (
                             <PaginationItem>
-                                <PaginationLink
-                                    onClick={() => handlePageChange(visiblePages[visiblePages.length - 1] + 1)}
-                                >
+                                <PaginationLink onClick={() => navigateToPage(visiblePages[visiblePages.length - 1] + 1)}>
                                     ...
                                 </PaginationLink>
                             </PaginationItem>
                         )}
                         <PaginationItem>
-                            <PaginationLink
-                                onClick={() => handlePageChange(totalPages)}
-                            >
+                            <PaginationLink onClick={() => navigateToPage(totalPages)}>
                                 Last
                             </PaginationLink>
                         </PaginationItem>
@@ -98,14 +89,10 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 )}
                 {currentPage < totalPages && (
                     <PaginationItem>
-                        <PaginationNext
-                            onClick={() => handlePageChange(currentPage + 1)}
-                        />
+                        <PaginationNext onClick={() => currentPage < totalPages && navigateToPage(currentPage + 1)} />
                     </PaginationItem>
                 )}
             </PaginationContent>
         </Pagination>
     );
-};
-
-export default PaginationComponent;
+}

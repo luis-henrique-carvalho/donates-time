@@ -8,8 +8,6 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-    DialogClose,
 } from "@/components/ui/dialog"
 // Hooks
 import { useToast } from '@/components/ui/use-toast'
@@ -58,9 +56,9 @@ const CreateVolunteerButton: React.FC<Props> = ({ action_id }) => {
 
     return (
         <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-            <DialogTrigger>
-                <Button variant="default">Inscrevas-se</Button>
-            </DialogTrigger>
+            <Button variant="default" onClick={() => setModalOpen(true)}>
+                Subscribe
+            </Button>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Are you absolutely sure?</DialogTitle>
