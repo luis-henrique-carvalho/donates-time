@@ -1,18 +1,14 @@
 'use client'
 
+import { DropdownMenuItem } from "../ui/dropdown-menu"
+import { DropdownMenuShortcut } from "../ui/dropdown-menu"
 import { signOut } from "next-auth/react"
-import { useRouter } from 'next/navigation'
 
 export default function ButtonLogout() {
-	const router = useRouter()
-
-	async function logout() {
-		await signOut({
-			redirect: false
-		})
-
-		router.replace('/')
-	}
-
-	return <button onClick={logout} className="p-2 w-40 border border-gray-300 rounded-md">Sair</button>
+	return (
+		<DropdownMenuItem onClick={() => signOut()} className="bg-destructive mb-1 text-white hover:bg-destructive/80">
+			Log out
+			<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+		</DropdownMenuItem>
+	)
 }

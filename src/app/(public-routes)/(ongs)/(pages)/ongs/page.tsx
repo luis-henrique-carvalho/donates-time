@@ -3,6 +3,7 @@ import React from 'react';
 import { fetchOngs } from '../../actions';
 import { IOngResponse } from '../../types';
 import OngList from '../../components/OngList';
+import PageContainer from '@/components/layout/PageContainer';
 
 
 const OngsPage = async () => {
@@ -21,15 +22,10 @@ const OngsPage = async () => {
 
     const ongs: IOngResponse = response;
 
-    console.log(ongs);
-
     return (
-        <main className='flex flex-1 bg-muted/40 flex-col gap-4 p-4 md:gap-8 md:p-8'>
-            <h1 className='heading-1'>Ongs</h1>
-            <div>
-                <OngList ongs={ongs.data} />
-            </div>
-        </main>
+        <PageContainer title='Ongs'>
+            <OngList ongs={ongs.data} />
+        </PageContainer>
     );
 };
 

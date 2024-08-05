@@ -15,14 +15,11 @@ import { siteConfig } from '@/config/site';
 import { configRoutes } from '@/config/routes';
 // Utils
 import { cn } from "@/lib/utils";
-// Hooks
-import { usePathname } from 'next/navigation';
+
 
 type Props = {}
 
 const MainNav = (props: Props) => {
-    const pathname = usePathname();
-
     return (
         <div className="mr-4 hidden sm:flex">
             <Link href="/" className="mr-4 flex items-center space-x-2 lg:mr-6">

@@ -16,12 +16,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Session } from "next-auth"
 import { signOut } from "next-auth/react"
-
+import ButtonLogout from "./ButtonLogout"
 
 interface UserNavProps {
     session: Session | null
 }
-
 
 const UserNav = ({ session }: UserNavProps) => {
     const user = session?.user
@@ -53,10 +52,9 @@ const UserNav = ({ session }: UserNavProps) => {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()}>
-                    Log out
-                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                </DropdownMenuItem>
+                <DropdownMenuGroup>
+                    <ButtonLogout />
+                </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
     )

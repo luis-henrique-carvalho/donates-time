@@ -1,17 +1,16 @@
-'use client'
-
 import React from 'react'
 import MainNav from './MainNav'
 import MobileNav from './MobileNav'
 import ThemeToggle from '../molecules/ThemeToggle'
 import Link from 'next/link'
-import { useSession } from "next-auth/react";
 import UserNav from '@/components/molecules/UserNav'
+import { getServerSession } from 'next-auth'
+import nextAuthOptions from '@/nextAuthOptions'
 
 type Props = {}
 
-const SiteHeader: React.FC<Props> = () => {
-    const { data: session } = useSession()
+const SiteHeader = async () => {
+    const session = await getServerSession(nextAuthOptions);
 
     return (
         <header className="sticky top-0 px-5 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

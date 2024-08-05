@@ -59,7 +59,7 @@ export function LoginForm() {
             description: "You have successfully logged in",
         })
 
-        router.replace("/")
+        router.refresh()
     }
 
     return (
