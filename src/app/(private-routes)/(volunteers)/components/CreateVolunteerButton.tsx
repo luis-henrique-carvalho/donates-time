@@ -11,9 +11,9 @@ import {
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog"
-import { Button } from '@/components/ui/button'
 // Hooks
 import { useToast } from '@/components/ui/use-toast'
+import { Button } from '@/components/ui/button'
 // Actions
 import { createVolunteer } from '../actions'
 
@@ -73,11 +73,9 @@ const CreateVolunteerButton: React.FC<Props> = ({ action_id }) => {
                     <Button type="button" variant="default" onClick={handleClick} disabled={isLoading}>
                         {isLoading ? 'Loading...' : 'Inscrevas-se'}
                     </Button>
-                    <DialogClose asChild>
-                        <Button type="button" variant="secondary" disabled={isLoading}>
-                            Close
-                        </Button>
-                    </DialogClose>
+                    <Button variant="ghost" onClick={() => setModalOpen(false)} disabled={isLoading}>
+                        Close
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

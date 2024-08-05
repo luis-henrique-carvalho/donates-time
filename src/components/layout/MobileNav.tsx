@@ -1,15 +1,14 @@
 "use client";
 // Flow
-import React from 'react'
+import React from 'react';
 // Components
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 import MobileLink from '@/components/molecules/MobileLink';
 // Icons
 import { IoMdMenu } from "react-icons/io";
@@ -22,8 +21,8 @@ import { usePathname } from 'next/navigation';
 type Props = {}
 
 const MobileNav = (props: Props) => {
-    const [open, setOpen] = React.useState(false)
-    const pathname = usePathname()
+    const [open, setOpen] = React.useState(false);
+    const pathname = usePathname();
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
@@ -36,19 +35,35 @@ const MobileNav = (props: Props) => {
                 </SheetHeader>
                 <nav className="flex flex-col gap-2 my-4 pb-10 pl-6">
                     {configRoutes.navMenuRoutes.map(route => (
-                        <MobileLink key={route.href} href={route.href} onOpenChange={setOpen}>
-                            <span className={cn(
-                                "transition-colors hover:text-foreground/80",
-                                pathname === route.href ? "text-foreground" : "text-foreground/60"
-                            )}>
-                                {route.title}
-                            </span>
-                        </MobileLink>
+                        <div key={route.href}>
+                            <MobileLink href={route.href} onOpenChange={setOpen}>
+                                <span className={cn(
+                                    "transition-colors hover:text-primary/80",
+                                    pathname === route.href ? "text-primary" : "text-foreground/60"
+                                )}>
+                                    {route.title}
+                                </span>
+                            </MobileLink>
+                            {route.actions && (
+                                <div className="ml-4 flex flex-col gap-1">
+                                    {route.actions.map(action => (
+                                        <MobileLink key={action.href} href={action.href} onOpenChange={setOpen}>
+                                            <span className={cn(
+                                                "transition-colors hover:text-primary/80",
+                                                pathname === action.href ? "text-primary" : "text-foreground/60"
+                                            )}>
+                                                {action.title}
+                                            </span>
+                                        </MobileLink>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </nav>
             </SheetContent>
         </Sheet>
-    )
+    );
 }
 
-export default MobileNav
+export default MobileNav;
