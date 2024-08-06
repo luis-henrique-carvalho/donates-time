@@ -1,4 +1,3 @@
-// src/app/(public-routes)/(ongs)/services/ongs.service.ts
 import { api } from "@/services/api.service";
 import { IOngResponse } from "../types";
 
@@ -8,9 +7,9 @@ export class OngService {
       const response = await api.get("api/v1/ongs");
       return response.data;
     } catch (error: any) {
-      return {
-        error: error.response.data.errors || "An error occurred",
-      };
+      // Se o erro não tiver uma resposta estruturada, forneça uma mensagem padrão
+      const errorMessage = error.response?.data?.errors || "An error occurred";
+      return { error: errorMessage };
     }
   }
 }
