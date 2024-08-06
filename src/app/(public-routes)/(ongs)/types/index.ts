@@ -1,1 +1,1 @@
-export type { IOng, IOngResponse } from "./Ong";
+export type { IOng, IOngResponse, IOngFormData } from "./Ong";
