@@ -8,6 +8,7 @@ export const fetchActionById = async (
 ): Promise<IAction | { error: string }> => {
   try {
     const response = await ActionService.getActionById(action_id);
+
     if (!response || "error" in response) {
       throw new Error(response.error || "Unknown error");
     }

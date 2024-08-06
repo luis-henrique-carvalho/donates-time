@@ -3,17 +3,13 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import Image from "next/image"
 import React from 'react'
 import { fetchActionById } from '../../../actions/fetchActionById'
-import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
-import { CgProfile } from 'react-icons/cg'
-import { FaCalendarAlt, FaCalendarTimes } from 'react-icons/fa'
-import { format } from 'date-fns';
-import { Progress } from '@/components/ui/progress'
 import ActionCard from '../../../components/ActionCard'
 
 
 const ActionDetails = async ({ params }: { params: { action_id: string } }) => {
     const action = await fetchActionById(params.action_id)
+
+    console.log(action)
 
     if (!action || 'error' in action) {
         return (

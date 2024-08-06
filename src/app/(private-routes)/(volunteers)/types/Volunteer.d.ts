@@ -1,30 +1,17 @@
 import { IActionStatus } from "@/app/(public-routes)/(actions)/types";
 import { IPagination } from "@/types/Pagination";
 
-export interface IVolunteerAttributes {
-  id: string;
-  confirmed: boolean;
-  user_id: string;
-  action_id: string;
-  created_at: string;
-  updated_at: string;
-  user: {
-    name: string;
-    email: string;
-  };
-  action: {
-    title: string;
-    status: IActionStatus;
-    category: string;
-    start_date: string;
-    end_date: string;
-  };
-}
-
 export interface IVolunteer {
   id: string;
-  type: string;
-  attributes: IVolunteerAttributes;
+  action_id: string;
+  action_ong_name: string;
+  action_title: string;
+  confirmed: boolean;
+  created_at: string;
+  updated_at: string;
+  user_email: string;
+  user_id: string;
+  user_name: string;
 }
 
 export interface IVolunteerResponse {
