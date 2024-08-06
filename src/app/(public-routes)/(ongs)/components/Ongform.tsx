@@ -31,6 +31,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { IongCategory } from "../schema/ongSchema";
 import { Textarea } from "@/components/ui/textarea";
+import { createOng } from "../actions/createOng";
 
 const Ongform = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -42,19 +43,17 @@ const Ongform = () => {
     })
 
     async function onSubmit(data: z.infer<typeof ongSchema>) {
-        setIsLoading(true)
 
+        const response = await createOng(data)
 
-        setIsLoading(false)
+        console.log(response)
 
 
         toast({
             variant: "primary",
             title: "Success",
-            description: "You have successfully logged in",
+            description: `Ong ${response.data?.attributes.name} criada com sucesso`,
         })
-
-        router.refresh()
     }
 
     return (

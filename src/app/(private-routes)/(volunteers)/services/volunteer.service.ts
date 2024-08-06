@@ -26,9 +26,11 @@ export class VolunteerService {
 
       return response.data;
     } catch (error: any) {
-      return {
-        error: error.response.data.errors || "An error occurred",
-      };
+      const errorMessage =
+        error.response?.data?.errors ||
+        error.response?.data?.error ||
+        "An error occurred";
+      return { error: errorMessage };
     }
   }
 }
