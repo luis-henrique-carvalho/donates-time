@@ -20,13 +20,13 @@ type Props = {
 };
 
 const OngCard = ({ ong }: Props) => {
-    const formattedDate = format(new Date(ong.attributes.created_at), 'dd MMMM yyyy');
+    const formattedDate = format(new Date(ong.created_at), 'dd MMMM yyyy');
 
     return (
         <Card className='flex flex-col justify-between'>
             <CardHeader>
-                <CardTitle>{ong.attributes.name}</CardTitle>
-                <CardDescription> <span className='font-bold text-primary'>Categoria:</span> {ong.attributes.category}</CardDescription>
+                <CardTitle>{ong.name}</CardTitle>
+                <CardDescription> <span className='font-bold text-primary'>Categoria:</span> {ong.category}</CardDescription>
             </CardHeader>
             <CardContent className="h-4/5">
                 <div className=" flex items-center space-x-4 rounded-md border p-4 h-full">
@@ -36,14 +36,14 @@ const OngCard = ({ ong }: Props) => {
                         </h3>
                         <div className='flex flex-col justify-between'>
                             <span className='font-bold text-primary'>Cidade:</span>
-                            <span>{ong.attributes.city}-{ong.attributes.state}</span>
+                            <span>{ong.city}-{ong.state}</span>
                         </div>
                         <div className='flex flex-col justify-between'>
                             <span className='font-bold text-primary'>Data de criação:</span>
                             <span>{formattedDate}</span>
                         </div>
                         <p className="text-sm text-muted-foreground">
-                            {ong.attributes.description}
+                            {ong.description}
                         </p>
                     </div>
                 </div>
