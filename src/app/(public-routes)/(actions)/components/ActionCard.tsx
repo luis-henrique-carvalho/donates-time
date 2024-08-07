@@ -77,16 +77,16 @@ const ActionCard = ({ action, variant = "default" }: Props) => {
             className={`flex flex-col gap-2 ${isPageShow ? "text-base" : "text-sm"}`}
           >
             <div className='flex items-center gap-2'>
-              <CgProfile className='text-primary' />{" "}
+              <CgProfile className='text-primary' />
               <span className='font-semibold'>ONG:</span> {ong.name}
             </div>
             <div className='flex items-center gap-2'>
-              <FaCalendarAlt className='text-primary' />{" "}
-              <span className='font-semibold'>Início:</span>{" "}
+              <FaCalendarAlt className='text-primary' />
+              <span className='font-semibold'>Início:</span>
               {formattedStartDate}
             </div>
             <div className='flex items-center gap-2'>
-              <FaCalendarTimes className='text-primary' />{" "}
+              <FaCalendarTimes className='text-primary' />
               <span className='font-semibold'>Fim:</span> {formattedEndDate}
             </div>
           </section>

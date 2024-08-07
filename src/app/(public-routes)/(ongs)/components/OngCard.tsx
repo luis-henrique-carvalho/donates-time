@@ -28,8 +28,7 @@ const OngCard = ({ ong }: Props) => {
       <CardHeader>
         <CardTitle>{ong.name}</CardTitle>
         <CardDescription>
-          {" "}
-          <span className='font-bold text-primary'>Categoria:</span>{" "}
+          <span className='font-bold text-primary'>Categoria:</span>
           {ong.category}
         </CardDescription>
       </CardHeader>
