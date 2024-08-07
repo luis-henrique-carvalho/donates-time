@@ -46,14 +46,22 @@ const Ongform = () => {
 
         const response = await createOng(data)
 
-        console.log(response)
-
+        if ("error" in response) {
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: response.error,
+            })
+            return
+        }
 
         toast({
             variant: "primary",
             title: "Success",
-            description: `Ong ${response.data?.attributes.name} criada com sucesso`,
+            description: `Ong ${response.data.name} criada com sucesso`,
         })
+
+        router.push(`/ongs`)
     }
 
     return (

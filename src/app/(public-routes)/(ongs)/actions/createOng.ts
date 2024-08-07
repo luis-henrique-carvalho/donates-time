@@ -6,11 +6,11 @@ import { ICreateOngResponse } from "../types";
 
 export const createOng = async (
   data: ongFormData
-): Promise<ICreateOngResponse> => {
+): Promise<ICreateOngResponse | { error: string }> => {
   const response = await OngService.createOng(data);
 
   if (!response || "error" in response) {
-    throw new Error(response.error || "Unknown error");
+    return { error: response.error || "Unknown error" };
   }
 
   return response;
