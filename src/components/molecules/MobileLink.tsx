@@ -1,40 +1,40 @@
-"use client"
+"use client";
 // Components
-import React from 'react';
-import Link, { LinkProps } from 'next/link';
+import React from "react";
+import Link, { LinkProps } from "next/link";
 // Utils
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 // Hooks
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
 interface MobileLinkProps extends LinkProps {
-    children: React.ReactNode;
-    onOpenChange?: (open: boolean) => void;
-    className?: string;
+  children: React.ReactNode;
+  onOpenChange?: (open: boolean) => void;
+  className?: string;
 }
 
 const MobileLink = ({
-    href,
-    onOpenChange,
-    className,
-    children,
-    ...props
+  href,
+  onOpenChange,
+  className,
+  children,
+  ...props
 }: MobileLinkProps) => {
-    const router = useRouter();
+  const router = useRouter();
 
-    return (
-        <Link
-            href={href}
-            onClick={() => {
-                router.push(href.toString());
-                onOpenChange?.(false);
-            }}
-            className={cn(className)}
-            {...props}
-        >
-            {children}
-        </Link>
-    );
+  return (
+    <Link
+      href={href}
+      onClick={() => {
+        router.push(href.toString());
+        onOpenChange?.(false);
+      }}
+      className={cn(className)}
+      {...props}
+    >
+      {children}
+    </Link>
+  );
 };
 
 export default MobileLink;

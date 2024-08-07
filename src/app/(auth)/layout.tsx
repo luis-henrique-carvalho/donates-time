@@ -4,15 +4,15 @@ import nextAuthOptions from "@/nextAuthOptions";
 import { redirect } from "next/navigation";
 
 interface PrivateLayoutProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
 export default async function PrivateLayout({ children }: PrivateLayoutProps) {
-    const session = await getServerSession(nextAuthOptions)
+  const session = await getServerSession(nextAuthOptions);
 
-    if (session) {
-        redirect('/')
-    }
+  if (session) {
+    redirect("/");
+  }
 
-    return <>{children}</>
+  return <>{children}</>;
 }

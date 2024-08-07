@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
-    return (
-        <div>{params.ong_id}</div>
-    )
-}
+  return <div>{params.ong_id}</div>;
+};
 
-export default OngDetails
+export default OngDetails;

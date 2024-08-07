@@ -1,7 +1,7 @@
-import "@/styles/globals.css"
-import { Inter as FontSans } from "next/font/google"
+import "@/styles/globals.css";
+import { Inter as FontSans } from "next/font/google";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import NextAuthSessionProvider from "@/providers/SessionProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import SiteHeader from "@/components/layout/SiteHeader";
@@ -15,11 +15,11 @@ interface RootLayoutProps {
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning>
       <head />
       <body
         className={cn(
@@ -29,19 +29,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <NextAuthSessionProvider>
           <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
+            attribute='class'
+            defaultTheme='system'
             enableSystem
             disableTransitionOnChange
           >
             <SiteHeader />
-            <Container>
-              {children}
-            </Container>
+            <Container>{children}</Container>
             <Toaster />
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
-    </html >
-  )
+    </html>
+  );
 }

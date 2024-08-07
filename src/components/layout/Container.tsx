@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
 interface ContainerProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const Container = ({ children }: ContainerProps) => {
-    return (
-        <div className="container rounde p-5 h-14 min-h-screen items-center">
-            {children}
-        </div>
-    )
-}
+  return (
+    <div className='rounde container h-14 min-h-screen items-center p-5'>
+      {children}
+    </div>
+  );
+};
 
-export default Container
+export default Container;

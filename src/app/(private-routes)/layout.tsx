@@ -1,13 +1,9 @@
 import { ReactNode } from "react";
 
 interface PrivateLayoutProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
 export default async function PrivateLayout({ children }: PrivateLayoutProps) {
-    return (
-        <>
-            {children}
-        </>
-    )
+  return <>{children}</>;
 }
