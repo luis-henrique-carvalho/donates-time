@@ -1,5 +1,6 @@
 import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { AuthApiService } from "./app/(auth)/services/auth-api.service";
 
 const nextAuthOptions: NextAuthOptions = {
   providers: [
@@ -10,27 +11,21 @@ const nextAuthOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        const response = await fetch("http://localhost:3001/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            user: {
-              email: credentials?.email,
-              password: credentials?.password,
-            },
-          }),
-        });
+        const response = await AuthApiService.signIn(
+          credentials!.email,
+          credentials!.password
+        );
 
-        const data = await response.json();
+        if ("error" in response) {
+          return null;
+        }
 
-        if (data && response.ok) {
+        if (response.data && response.statusText === "OK") {
           const user: User = {
-            id: data.data.user.id,
-            email: data.data.user.email,
-            name: data.data.user.name,
-            token: data.token,
+            id: response.data.user.id,
+            email: response.data.user.email,
+            name: response.data.user.name,
+            token: response.data.token,
           };
           return user;
         }

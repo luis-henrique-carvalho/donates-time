@@ -1,23 +1,11 @@
+// Service
 import { api } from "@/services/api.service";
+// Types
 import { IOngResponse, ICreateOngResponse } from "../types";
+// Schema
 import { ongFormData } from "../schema";
-import { getServerSession } from "next-auth";
-import nextAuthOptions from "@/nextAuthOptions";
-
-// Função auxiliar para tratar erros
-const handleApiError = (error: any): { error: string } => {
-  const errorMessage =
-    error.response?.data?.errors ||
-    error.response?.data?.error ||
-    "An error occurred";
-  return { error: errorMessage };
-};
-
-// Função auxiliar para obter a sessão
-const getSession = async () => {
-  const session = await getServerSession(nextAuthOptions);
-  return session;
-};
+// Utils
+import { getSessionUtils, handleApiError } from "@/utils";
 
 export class OngService {
   static async getOngs(): Promise<IOngResponse | { error: string }> {
@@ -25,7 +13,7 @@ export class OngService {
       const response = await api.get("api/v1/ongs");
       return response.data;
     } catch (error: any) {
-      return handleApiError(error);
+      return handleApiError(error, "An error occurred while fetching the ONGs");
     }
   }
 
@@ -36,13 +24,13 @@ export class OngService {
       const response = await api.get(`api/v1/ongs/${id}`);
       return response.data;
     } catch (error: any) {
-      return handleApiError(error);
+      return handleApiError(error, "An error occurred while fetching the ONG");
     }
   }
 
   static async getOngByUserId(): Promise<IOngResponse | { error: string }> {
     try {
-      const session = await getSession();
+      const session = await getSessionUtils();
       const response = await api.get(`api/v1/ongs/user/${session?.user?.id}`, {
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
@@ -51,7 +39,7 @@ export class OngService {
 
       return response.data;
     } catch (error: any) {
-      return handleApiError(error);
+      return handleApiError(error, "An error occurred while fetching the ONG");
     }
   }
 
@@ -59,7 +47,7 @@ export class OngService {
     data: ongFormData
   ): Promise<ICreateOngResponse | { error: string }> {
     try {
-      const session = await getSession();
+      const session = await getSessionUtils();
       const response = await api.post("api/v1/ongs", data, {
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
@@ -68,7 +56,7 @@ export class OngService {
 
       return response.data;
     } catch (error: any) {
-      return handleApiError(error);
+      return handleApiError(error, "An error occurred while creating the ONG");
     }
   }
 }
