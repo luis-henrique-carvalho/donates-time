@@ -12,7 +12,7 @@ export const fetchActions = async (
     const response = await ActionService.getActions(actionSearch, actionPage);
 
     if (!response || "error" in response) {
-      throw new Error(response.error || "Unknown error");
+      return { error: response.error || "Unknown error" };
     }
 
     return response;

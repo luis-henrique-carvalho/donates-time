@@ -8,9 +8,19 @@ import { ongFormData } from "../schema";
 import { getSessionUtils, handleApiError } from "@/utils";
 
 export class OngService {
-  static async getOngs(): Promise<IOngResponse | { error: string }> {
+  static async getOngs(
+    ongSearch: string,
+    ongPage: number
+  ): Promise<IOngResponse | { error: string }> {
     try {
-      const response = await api.get("api/v1/ongs");
+      const response = await api.get("api/v1/ongs", {
+        params: {
+          q: {
+            name_cont: ongSearch,
+          },
+          page: ongPage,
+        },
+      });
       return response.data;
     } catch (error: any) {
       return handleApiError(error, "An error occurred while fetching the ONGs");
