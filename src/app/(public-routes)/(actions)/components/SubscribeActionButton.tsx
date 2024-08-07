@@ -32,7 +32,7 @@ const SubscribeActionButton: React.FC<Props> = ({ action_id }) => {
                     title: 'Success',
                     description: 'You have successfully subscribed',
                 })
-                router.replace("/")
+                router.refresh()
             }
         } catch (error) {
             toast({

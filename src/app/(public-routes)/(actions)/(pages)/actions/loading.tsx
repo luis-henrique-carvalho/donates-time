@@ -9,10 +9,12 @@ const Loading = () => {
             <div className='flex-grow flex flex-col gap-4'>
                 <Search placeholder={"Pesquise pelo nome da ação"} />
 
-                <div>
-                    {Array.from({ length: 12 }).map((_, index) => (
-                        <SkeletonCard key={index} />
-                    ))}
+                <div className='flex-grow flex flex-col gap-4'>
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                        {Array.from({ length: 12 }).map((_, index) => (
+                            <SkeletonCard key={index} />
+                        ))}
+                    </div>
                 </div>
 
                 <div className="mt-5 flex w-full justify-center">

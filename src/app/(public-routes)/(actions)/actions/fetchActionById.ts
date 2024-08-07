@@ -10,10 +10,9 @@ export const fetchActionById = async (
     const response = await ActionService.getActionById(action_id);
 
     if (!response || "error" in response) {
-      throw new Error(response.error || "Unknown error");
+      return { error: response.error || "Unknown error" };
     }
 
-    console.log();
     return response.data;
   } catch (error: any) {
     console.error("Fetch Actions Error:", error.message);

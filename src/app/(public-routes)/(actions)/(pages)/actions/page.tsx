@@ -19,6 +19,8 @@ const Actions = async ({
     const currentPage = Number(searchParams?.page) || 1;
     const response = await fetchActions(query, currentPage);
 
+    console.log("renderizei");
+
     if ("error" in response) {
         return <div>Error: {response.error}</div>;
     }
