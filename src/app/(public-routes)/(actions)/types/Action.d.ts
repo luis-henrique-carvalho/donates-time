@@ -19,7 +19,7 @@ export interface IAction {
   created_at: string;
   updated_at: string;
   volunteer_count: number;
-  volunteers: IVolunteer[];
+  volunteers?: IVolunteer[];
 }
 
 export interface IActionResponse {

@@ -1,4 +1,7 @@
+import { ISignUp, IUser } from "@/app/(auth)/types";
+import { IOngResponse } from "./Ong.d";
 import { IPagination } from "@/types/Pagination";
+import { IAction } from "../../(actions)/types";
 
 export interface IOng {
   id: string;
@@ -11,6 +14,8 @@ export interface IOng {
   user_id: string;
   created_at: date;
   updated_at: string;
+  user?: ISignUp;
+  actions?: IAction[];
 }
 
 export interface IOngResponse {
@@ -20,5 +25,9 @@ export interface IOngResponse {
 
 export interface ICreateOngResponse {
   message: string;
+  data: IOng;
+}
+
+export interface IOngResponseUnique {
   data: IOng;
 }

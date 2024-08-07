@@ -36,13 +36,12 @@ const ActionCard = ({ action, variant = "default" }: Props) => {
     start_date,
     end_date,
     max_volunteers,
+    volunteers,
     volunteer_count,
     category,
     description,
   } = action;
-  const { volunteers } = action;
 
-  console.log(volunteers);
   const isPageShow = variant === "show";
 
   const formattedStartDate = start_date

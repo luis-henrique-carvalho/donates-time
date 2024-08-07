@@ -5,7 +5,7 @@ import { RegisterForm } from "../../components/forms/RegisterForm";
 
 const Register = () => {
   return (
-    <div className='w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]'>
+    <div className='container w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]'>
       <div className='hidden bg-muted lg:block'>
         <Image
           src='/placeholder.svg'

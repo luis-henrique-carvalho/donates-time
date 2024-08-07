@@ -1,7 +1,7 @@
 // Service
 import { api } from "@/services/api.service";
 // Types
-import { IOngResponse, ICreateOngResponse } from "../types";
+import { IOngResponse, ICreateOngResponse, IOngResponseUnique } from "../types";
 // Schema
 import { ongFormData } from "../schema";
 // Utils
@@ -28,10 +28,10 @@ export class OngService {
   }
 
   static async getOngById(
-    id: string
-  ): Promise<IOngResponse | { error: string }> {
+    ong_id: string
+  ): Promise<IOngResponseUnique | { error: string }> {
     try {
-      const response = await api.get(`api/v1/ongs/${id}`);
+      const response = await api.get(`api/v1/ongs/${ong_id}`);
       return response.data;
     } catch (error: any) {
       return handleApiError(error, "An error occurred while fetching the ONG");

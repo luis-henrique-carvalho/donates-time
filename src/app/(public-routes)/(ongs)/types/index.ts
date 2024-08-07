@@ -1,6 +1,6 @@
 export type {
   IOng,
   IOngResponse,
-  IOngFormData,
   ICreateOngResponse,
+  IOngResponseUnique,
 } from "./Ong";

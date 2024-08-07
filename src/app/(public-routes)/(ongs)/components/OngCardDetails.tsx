@@ -1,7 +1,7 @@
-// src/app/(public-routes)/(ongs)/components/OngCard.tsx
 import React from "react";
+import { IOng } from "../types";
+
 // Components
-import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,30 +10,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-// Types
-import { IOng } from "../types";
-// Icons
-import { Check } from "lucide-react";
-// Utils
-import { format } from "date-fns";
-// Next
-import Link from "next/link";
 
 type Props = {
   ong: IOng;
 };
 
-const OngCard = ({ ong }: Props) => {
-  const formattedDate = format(new Date(ong.created_at), "dd MMMM yyyy");
-
+const OngCardDetails = ({ ong }: Props) => {
   return (
-    <Card className='flex flex-col justify-between'>
+    <Card className='flex flex-col justify-between border-none'>
       <CardHeader>
-        <CardTitle>{ong.name}</CardTitle>
-        <CardDescription>
-          <span className='font-bold text-primary'>Categoria:</span>
-          {ong.category}
-        </CardDescription>
+        <CardTitle>SOBRE NÓS</CardTitle>
+        <CardDescription>{ong.description}</CardDescription>
       </CardHeader>
       <CardContent className='h-4/5'>
         <div className='flex h-full items-center space-x-4 rounded-md border p-4'>
@@ -47,23 +34,19 @@ const OngCard = ({ ong }: Props) => {
             </div>
             <div className='flex flex-col justify-between'>
               <span className='font-bold text-primary'>Data de criação:</span>
-              <span>{formattedDate}</span>
+              <span>{ong.created_at}</span>
             </div>
             <p className='text-sm text-muted-foreground'>{ong.description}</p>
           </div>
         </div>
       </CardContent>
       <CardFooter>
-        <Link
-          className={`${buttonVariants({ variant: "default" })} w-full`}
-          href={`/ongs/${ong.id}`}
-        >
-          <Check className='mr-2 h-4 w-4' />
+        <a href={`/ongs/${ong.id}`} className='btn btn-default w-full'>
           Detalhes
-        </Link>
+        </a>
       </CardFooter>
     </Card>
   );
 };
 
-export default OngCard;
+export default OngCardDetails;
