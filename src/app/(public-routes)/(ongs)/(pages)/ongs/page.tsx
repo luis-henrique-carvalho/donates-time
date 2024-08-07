@@ -24,7 +24,7 @@ const OngsPage = async ({
     }
 
     return (
-        <PageContainer title='Actions'>
+        <PageContainer title='Ongs'>
             <div className='flex-grow flex flex-col gap-4'>
                 <Search placeholder={"Pesquise pelo nome da ong"} />
 

@@ -4,6 +4,7 @@ export const configRoutes: ConfigRoutes = {
   publicRoutes: [
     { title: "Home", href: "/" },
     { title: "Ongs", href: "/ongs" },
+    { title: "Ong Details", href: "/ongs/[id]" },
     { title: "Actions", href: "/actions" },
     { title: "Action Details", href: "/actions/[id]" },
     { title: "Volunteers", href: "/volunteers" },

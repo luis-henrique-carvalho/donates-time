@@ -12,8 +12,9 @@ import {
 
 import { IOng } from '../types';
 import { Check } from "lucide-react"
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { format } from 'date-fns';
+import Link from 'next/link';
 
 type Props = {
     ong: IOng;
@@ -49,9 +50,14 @@ const OngCard = ({ ong }: Props) => {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button className="w-full">
-                    <Check className="mr-2 h-4 w-4" /> Ver detalhes
-                </Button>
+
+
+                <Link className={`${buttonVariants({ variant: "default" })} w-full`}
+                    href={`/ongs/${ong.id}`}>
+                    <Check className="mr-2 h-4 w-4" />
+                    Detalhes
+                </Link>
+
             </CardFooter>
         </Card>
     );
