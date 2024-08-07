@@ -1,8 +1,9 @@
 import React from 'react';
 // Components
-import { SkeletonCard } from '@/components/molecules/SkeletonCard';
 import Search from '@/components/molecules/Seach';
 import PageContainer from '@/components/layout/PageContainer';
+import { ActionSkeletonCard } from '../../../components/ActionSkeletonCard';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Loading = () => {
     return (
@@ -11,15 +12,11 @@ const Loading = () => {
                 <Search placeholder={"Pesquise pelo nome da ação"} />
 
                 <div className='flex-grow flex flex-col gap-4'>
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-                        {Array.from({ length: 12 }).map((_, index) => (
-                            <SkeletonCard key={index} />
-                        ))}
-                    </div>
+                    <ActionSkeletonCard />
                 </div>
 
                 <div className="mt-5 flex w-full justify-center">
-
+                    <Skeleton />
                 </div>
             </div>
         </PageContainer>

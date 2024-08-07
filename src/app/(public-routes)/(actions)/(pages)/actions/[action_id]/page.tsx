@@ -9,8 +9,6 @@ import ActionCard from '../../../components/ActionCard'
 const ActionDetails = async ({ params }: { params: { action_id: string } }) => {
     const action = await fetchActionById(params.action_id)
 
-    console.log(action)
-
     if (!action || 'error' in action) {
         return (
             <PageContainer>
