@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import SiteHeader from "@/components/layout/SiteHeader";
 import Container from "@/components/layout/Container";
 import { Toaster } from "@/components/ui/toaster";
+import { MapProvider } from "@/providers/map-provider";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -34,9 +35,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader />
-            <Container>{children}</Container>
-            <Toaster />
+            <MapProvider>
+              <SiteHeader />
+              <Container>{children}</Container>
+              <Toaster />
+            </MapProvider>
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
