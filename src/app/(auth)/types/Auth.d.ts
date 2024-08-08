@@ -1,6 +1,6 @@
-import { IUser } from "./User";
+import { ISignIn } from "./SignIn";
 
 export interface IAuth {
   token: string;
-  user: IUser;
+  user: ISignIn;
 }
