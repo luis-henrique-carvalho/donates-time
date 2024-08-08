@@ -35,9 +35,9 @@ const OngCard = ({ ong }: Props) => {
           {ong.category}
         </CardDescription>
       </CardHeader>
-      <CardContent className='h-4/5'>
-        <div className='flex h-full items-center space-x-4 rounded-md border p-4'>
-          <div className='flex-1 space-y-2'>
+      <CardContent>
+        <div className='flex items-center space-x-4 p-4'>
+          <div className='w-full space-y-2'>
             <h3 className='text-center font-bold text-primary'>Descrição</h3>
             <div className='flex flex-col justify-between'>
               <span className='font-bold text-primary'>Cidade:</span>
@@ -49,7 +49,7 @@ const OngCard = ({ ong }: Props) => {
               <span className='font-bold text-primary'>Data de criação:</span>
               <span>{formattedDate}</span>
             </div>
-            <p className='text-sm text-muted-foreground'>{ong.description}</p>
+            <p className='text-sm text-muted-foreground break-all line-clamp-3'>{ong.description}</p>
           </div>
         </div>
       </CardContent>
