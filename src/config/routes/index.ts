@@ -13,7 +13,10 @@ export const configRoutes: ConfigRoutes = {
     { title: "Login", href: "/auth/login" },
     { title: "Register", href: "/auth/register}" },
   ],
-  privateRoutes: [{ title: "Create Ong", href: "/ongs/create" }],
+  privateRoutes: [
+    { title: "Create Ong", href: "/ongs/create" },
+    { title: "Create Action", href: "/actions/create" },
+  ],
   navMenuRoutes: [
     {
       title: "Ongs",
