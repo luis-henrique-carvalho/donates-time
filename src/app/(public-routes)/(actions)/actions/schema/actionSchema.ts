@@ -43,6 +43,8 @@ export const actionSchema = z
     category: z.nativeEnum(IactionCategory),
     max_volunteers: z.coerce.number().int().positive(),
     description: z.string().min(200),
+    // ong id is passed as a prop
+    ong_id: z.string().optional(),
   })
   .refine((data) => data.dateRange.from < data.dateRange.to, {
     path: ["dateRange"],

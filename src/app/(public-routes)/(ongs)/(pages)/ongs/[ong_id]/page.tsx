@@ -22,8 +22,6 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
 
   const { category, city, description, name, state, email, actions } = ong;
 
-  console.log(ong);
-
   return (
     <div className='flex flex-col xl:container xl:flex-row xl:justify-between'>
       <main className='flex min-h-[95%] flex-col bg-muted/40 xl:w-7/12 xl:gap-8 xl:p-8'>

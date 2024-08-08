@@ -49,8 +49,14 @@ export class ActionService {
     data: actionFormData
   ): Promise<ICreateActionResponse | { error: string }> {
     const session = await getSessionUtils();
+    const body = {
+      start_date: data.dateRange.from,
+      end_date: data.dateRange.to,
+      ...data,
+    };
+
     try {
-      const response = await api.post(`api/v1/actions`, data, {
+      const response = await api.post(`api/v1/actions`, body, {
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
         },

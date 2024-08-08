@@ -42,6 +42,7 @@ const Ongform = () => {
   });
 
   async function onSubmit(data: ongFormData) {
+    setIsLoading(true);
     const response = await createOng(data);
 
     if ("error" in response) {
@@ -50,6 +51,8 @@ const Ongform = () => {
         title: "Error",
         description: response.error,
       });
+      setIsLoading(false);
+
       return;
     }
 
@@ -58,6 +61,8 @@ const Ongform = () => {
       title: "Success",
       description: `Ong ${response.data.name} criada com sucesso`,
     });
+
+    setIsLoading(false);
 
     router.push(`/ongs`);
   }

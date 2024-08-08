@@ -43,6 +43,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
+import { createAction } from "../actions/createAction";
 
 interface Props {
   ong_id: string;
@@ -59,7 +60,28 @@ const ActionForm = ({ ong_id }: Props) => {
   });
 
   async function onSubmit(data: actionFormData) {
-    console.log(data);
+    setIsLoading(true);
+    const response = await createAction({ ...data, ong_id });
+
+    if ("error" in response) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: response.error,
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    toast({
+      variant: "primary",
+      title: "Success",
+      description: response.message,
+    });
+
+    setIsLoading(false);
+
+    router.push(`/actions`);
   }
 
   return (
@@ -178,7 +200,7 @@ const ActionForm = ({ ong_id }: Props) => {
 
         <FormField
           control={form.control}
-          name='category'
+          name='description'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Descrição</FormLabel>
