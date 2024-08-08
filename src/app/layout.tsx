@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import SiteHeader from "@/components/layout/SiteHeader";
 import Container from "@/components/layout/Container";
 import { Toaster } from "@/components/ui/toaster";
-import { MapProvider } from "@/providers/map-provider";
+import { MapProvider } from "@/providers/MapProvider";
 
 interface RootLayoutProps {
   children: React.ReactNode;

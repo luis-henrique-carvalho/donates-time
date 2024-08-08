@@ -49,7 +49,9 @@ const OngCard = ({ ong }: Props) => {
               <span className='font-bold text-primary'>Data de criação:</span>
               <span>{formattedDate}</span>
             </div>
-            <p className='text-sm text-muted-foreground break-all line-clamp-3'>{ong.description}</p>
+            <p className='line-clamp-3 break-all text-sm text-muted-foreground'>
+              {ong.description}
+            </p>
           </div>
         </div>
       </CardContent>

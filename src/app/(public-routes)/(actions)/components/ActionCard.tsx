@@ -77,7 +77,10 @@ const ActionCard = ({ action, variant = "default" }: Props) => {
           >
             <div className='flex items-center gap-2'>
               <CgProfile className='text-primary' />
-              <span className='font-semibold'>ONG:</span> {ong.name}
+              <span className='font-semibold'>ONG:</span>{" "}
+              <Link className='text-primary' href={`/ongs/${ong.id}`}>
+                {ong.name}
+              </Link>
             </div>
             <div className='flex items-center gap-2'>
               <FaCalendarAlt className='text-primary' />
@@ -98,7 +101,7 @@ const ActionCard = ({ action, variant = "default" }: Props) => {
               <Progress value={volunteerPercentage} />
             </div>
             <div className='flex flex-row items-center justify-center gap-2'>
-              {volunteers.map((volunteer, index) => {
+              {volunteers?.map((volunteer, index) => {
                 return (
                   <Avatar key={index}>
                     <AvatarImage src={volunteer.id} />
