@@ -8,6 +8,7 @@ import SiteHeader from "@/components/layout/SiteHeader";
 import Container from "@/components/layout/Container";
 import { Toaster } from "@/components/ui/toaster";
 import { MapProvider } from "@/providers/MapProvider";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -37,7 +38,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           >
             <MapProvider>
               <SiteHeader />
-              <Container>{children}</Container>
+              <Container>
+                {children}
+                <SiteFooter />
+              </Container>
+
               <Toaster />
             </MapProvider>
           </ThemeProvider>

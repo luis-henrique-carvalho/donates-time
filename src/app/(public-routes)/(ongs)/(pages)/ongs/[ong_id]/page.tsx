@@ -3,29 +3,15 @@ import React from "react";
 import { fetchOngById } from "../../../actions";
 // Components
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import OngCardDetails from "../../../components/OngCardDetails";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-
+import OngActionCard from "../../../components/OngActionCard";
+import AsideOngCard from "../../../components/AsideOngCard";
 //  Icons
 import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidCategory } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
-// Utils
-import { format } from "date-fns";
-
 // Next
 import Image from "next/image";
-import OngActionCard from "../../../components/OngActionCard";
-import { MapComponent } from "@/components/molecules/Map";
 
 const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
   const ong = await fetchOngById(params.ong_id);
@@ -34,21 +20,10 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
     return <div>{ong.error}</div>;
   }
 
-  const {
-    category,
-    city,
-    created_at,
-    description,
-    name,
-    state,
-    email,
-    actions,
-  } = ong;
+  const { category, city, description, name, state, email, actions } = ong;
 
-  const formattedCreatedAt = format(
-    new Date(created_at),
-    "dd/MM/yyyy 'às' HH'hrs'"
-  );
+  console.log(ong);
+
   return (
     <div className='flex flex-col xl:container xl:flex-row xl:justify-between'>
       <main className='flex min-h-[95%] flex-col bg-muted/40 xl:w-7/12 xl:gap-8 xl:p-8'>
@@ -119,45 +94,7 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
           </div>
         </div>
       </main>
-      <aside className='hidden w-4/12 flex-col xl:flex'>
-        <Card className='bg-muted/40' variant={"show"}>
-          <MapComponent
-            defaultMapCenter={{
-              lat: -23.5505199,
-              lng: -46.6333094,
-            }}
-            defaultMapZoom={12}
-            defaultMapOptions={{
-              zoomControl: true,
-              tilt: 45,
-              gestureHandling: "greedy",
-              mapTypeId: "roadmap",
-            }}
-            className='h-48 rounded-md'
-          />
-          <CardHeader>
-            <CardTitle>{name}</CardTitle>
-            <CardDescription>Criado em: {formattedCreatedAt}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <section className='flex flex-col gap-2'>
-              <h4 className='heading-4 text-muted-foreground'>SOBRE NÓS</h4>
-              <p>{description}</p>
-            </section>
-          </CardContent>
-          <CardFooter>
-            <section className='flex flex-col gap-2'>
-              <h4 className='heading-4 text-muted-foreground'>Contato</h4>
-              <ul className='flex flex-col gap-2 text-base'>
-                <li className='flex items-center gap-2'>
-                  <MdEmail className='text-2xl text-primary' />
-                  <span className='break-all'>{email}</span>
-                </li>
-              </ul>
-            </section>
-          </CardFooter>
-        </Card>
-      </aside>
+      <AsideOngCard ong={ong} />
     </div>
   );
 };

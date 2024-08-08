@@ -14,6 +14,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 // Actions
 import { createVolunteer } from "../actions";
+// Navigation
+import { useRouter } from "next/navigation";
 
 type Props = {
   action_id: string;
@@ -22,6 +24,7 @@ type Props = {
 const CreateVolunteerButton: React.FC<Props> = ({ action_id }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { toast } = useToast();
 
   const handleClick = async () => {
@@ -41,6 +44,7 @@ const CreateVolunteerButton: React.FC<Props> = ({ action_id }) => {
           title: "Success",
           description: "You have successfully subscribed",
         });
+        router.refresh();
         setModalOpen(false);
       }
     } catch (error) {
