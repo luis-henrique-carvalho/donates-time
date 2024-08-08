@@ -3,4 +3,5 @@ export type {
   IActionResponse,
   IActionResponseUnique,
   IActionStatus,
+  ICreateActionResponse,
 } from "./Action";

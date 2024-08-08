@@ -53,7 +53,7 @@ export class OngService {
     }
   }
 
-  static async createOng(
+  static async createOngService(
     data: ongFormData
   ): Promise<ICreateOngResponse | { error: string }> {
     try {

@@ -7,7 +7,7 @@ import { ICreateOngResponse } from "../types";
 export const createOng = async (
   data: ongFormData
 ): Promise<ICreateOngResponse | { error: string }> => {
-  const response = await OngService.createOng(data);
+  const response = await OngService.createOngService(data);
 
   if (!response || "error" in response) {
     return { error: response.error || "Unknown error" };

@@ -1,4 +1,5 @@
 import { fetchUserById } from "@/app/(private-routes)/(users)/actions";
+import ActionForm from "@/app/(public-routes)/(actions)/components/ActionForm";
 import PageContainer from "@/components/layout/PageContainer";
 import { getSessionUtils } from "@/utils";
 import { redirect } from "next/navigation";
@@ -19,7 +20,9 @@ const ActionsCreate = async () => {
 
   return (
     <PageContainer title='Crie Sua Ação'>
-      <div className='flex flex-grow flex-col gap-4'></div>
+      <div className='flex flex-grow flex-col gap-4'>
+        <ActionForm ong_id={user.data.ong.id} />
+      </div>
     </PageContainer>
   );
 };

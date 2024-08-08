@@ -41,7 +41,7 @@ const Ongform = () => {
     resolver: zodResolver(ongSchema),
   });
 
-  async function onSubmit(data: z.infer<typeof ongSchema>) {
+  async function onSubmit(data: ongFormData) {
     const response = await createOng(data);
 
     if ("error" in response) {

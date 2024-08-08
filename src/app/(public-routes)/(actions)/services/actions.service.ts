@@ -1,5 +1,14 @@
 import { api } from "@/services/api.service";
-import { IActionResponse, IActionResponseUnique } from "../types";
+// Types
+import {
+  IActionResponse,
+  IActionResponseUnique,
+  ICreateActionResponse,
+} from "../types";
+// Utils
+import { getSessionUtils } from "@/utils";
+// Schema
+import { actionFormData } from "../actions/schema";
 
 export class ActionService {
   static async getActions(
@@ -28,6 +37,25 @@ export class ActionService {
   ): Promise<IActionResponseUnique | { error: string }> {
     try {
       const response = await api.get(`api/v1/actions/${action_id}`);
+      return response.data;
+    } catch (error: any) {
+      return {
+        error: error.response.data.errors || "An error occurred",
+      };
+    }
+  }
+
+  static async createActionService(
+    data: actionFormData
+  ): Promise<ICreateActionResponse | { error: string }> {
+    const session = await getSessionUtils();
+    try {
+      const response = await api.post(`api/v1/actions`, data, {
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      });
+
       return response.data;
     } catch (error: any) {
       return {

@@ -30,3 +30,8 @@ export interface IActionResponse {
 export interface IActionResponseUnique {
   data: IAction;
 }
+
+export interface ICreateActionResponse {
+  message: string;
+  data: IAction;
+}
