@@ -19,7 +19,6 @@ const SubscribeActionButton: React.FC<Props> = ({ action_id }) => {
     try {
       const result = await createVolunteer(action_id);
 
-      console.log(result);
       if ("error" in result) {
         toast({
           variant: "destructive",

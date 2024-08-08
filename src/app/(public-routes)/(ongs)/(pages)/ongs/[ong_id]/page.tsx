@@ -33,7 +33,6 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
 
   const { category, city, created_at, description, name, state, email, actions } = ong
 
-  console.log(actions)
   return (
     <main className='flex min-h-[95%] flex-col bg-muted/40 md:gap-8 md:p-8'>
       <AspectRatio ratio={12 / 6} className='bg-muted'>

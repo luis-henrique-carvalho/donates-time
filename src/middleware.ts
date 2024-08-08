@@ -12,7 +12,6 @@ export async function middleware(request: NextRequest) {
 
   if (isProtectedRoute) {
     const isAuth = await isAuthenticated(request);
-    console.log("isAuth", isAuth);
     if (!isAuth) {
       return NextResponse.redirect(new URL("/login", request.url));
     }

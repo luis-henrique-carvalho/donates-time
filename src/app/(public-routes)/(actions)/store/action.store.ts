@@ -34,7 +34,7 @@ export const useActionStore = create<ActionStoreState & ActionStoreActions>(
       const { actionSearch, actionPage } = get();
       try {
         const response = await fetchActions(actionSearch, actionPage);
-        console.log(response);
+
         if ("error" in response) {
           set({ actionError: response.error });
           return;

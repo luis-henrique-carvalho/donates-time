@@ -22,8 +22,6 @@ export class VolunteerService {
         }
       );
 
-      console.log(response.data);
-
       return response.data;
     } catch (error: any) {
       const errorMessage =
