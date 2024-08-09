@@ -4,20 +4,17 @@ import { fetchUserById } from "@/app/(private-routes)/(users)/actions";
 // Components
 import ActionForm from "@/app/(public-routes)/(actions)/components/ActionForm";
 import ActionNoOngFound from "@/app/(public-routes)/(actions)/components/ActionNoOngFound";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 // Layout
 import PageContainer from "@/components/layout/PageContainer";
 // Utils
 import { getSessionUtils } from "@/utils";
-// Next
-import Link from "next/link";
 // Icons
 import { LuShieldAlert } from "react-icons/lu";
 import AlertWithLink from "@/components/molecules/AlertWithLink";
 
 const ActionsCreate = async () => {
   const session = await getSessionUtils();
-  const { data, error } = await fetchUserById(session?.user.id);
+  const { data } = await fetchUserById(session?.user.id);
 
   const ong = data?.ong;
 

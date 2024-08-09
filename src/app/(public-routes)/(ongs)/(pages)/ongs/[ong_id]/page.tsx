@@ -12,9 +12,8 @@ import { BiSolidCategory } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 // Next
 import Image from "next/image";
-import AlertWithLink from "@/components/molecules/AlertWithLink";
 import { LuShieldAlert } from "react-icons/lu";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
   const ong = await fetchOngById(params.ong_id);
