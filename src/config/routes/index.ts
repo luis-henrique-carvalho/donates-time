@@ -17,22 +17,4 @@ export const configRoutes: ConfigRoutes = {
     { title: "Create Ong", href: "/ongs/create" },
     { title: "Create Action", href: "/actions/create" },
   ],
-  navMenuRoutes: [
-    {
-      title: "Ongs",
-      href: "/ongs",
-      actions: [
-        { title: "Listar Ongs", href: "/ongs" },
-        { title: "Criar Ong", href: "/ongs/create" },
-      ],
-    },
-    {
-      title: "Ação",
-      href: "/actions",
-      actions: [
-        { title: "Listar Ação", href: "/actions" },
-        { title: "Criar Ação", href: "/actions/create" },
-      ],
-    },
-  ],
 };

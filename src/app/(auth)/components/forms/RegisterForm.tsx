@@ -65,7 +65,7 @@ export function RegisterForm() {
 
     setIsLoading(false);
 
-    router.push("/");
+    router.refresh();
   }
 
   return (
