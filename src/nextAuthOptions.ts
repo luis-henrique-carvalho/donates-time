@@ -26,6 +26,7 @@ const nextAuthOptions: NextAuthOptions = {
             email: response.data.user.email,
             name: response.data.user.name,
             token: response.data.token,
+            ong: response.data.user.ong,
           };
           return user;
         }
@@ -46,6 +47,7 @@ const nextAuthOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
+          ong: user.ong,
         };
       }
       return token;

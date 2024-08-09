@@ -69,7 +69,9 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
                 {actions && actions.length > 0 ? (
                   actions
                     .slice(0, 6)
-                    .map((action) => <OngActionCard action={action} />)
+                    .map((action) => (
+                      <OngActionCard key={action.id} action={action} />
+                    ))
                 ) : (
                   <p>Essa ONG ainda não possui ações cadastradas.</p>
                 )}

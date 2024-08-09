@@ -14,5 +14,6 @@ export interface IUserResponse {
 }
 
 export interface IUserResponseUnique {
-  data: IUser;
+  data?: IUser | null;
+  error?: string;
 }

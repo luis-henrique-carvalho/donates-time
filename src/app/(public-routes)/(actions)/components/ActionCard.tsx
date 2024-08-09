@@ -104,7 +104,7 @@ const ActionCard = ({ action, variant = "default" }: Props) => {
               {volunteers?.map((volunteer, index) => {
                 return (
                   <Avatar key={index}>
-                    <AvatarImage src={volunteer.id} />
+                    {/* <AvatarImage /> */}
                     <AvatarFallback>
                       {volunteer.user_name.charAt(0)}
                     </AvatarFallback>
