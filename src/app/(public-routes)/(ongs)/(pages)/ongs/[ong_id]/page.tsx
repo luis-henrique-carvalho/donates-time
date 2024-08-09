@@ -12,6 +12,9 @@ import { BiSolidCategory } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 // Next
 import Image from "next/image";
+import AlertWithLink from "@/components/molecules/AlertWithLink";
+import { LuShieldAlert } from "react-icons/lu";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
   const ong = await fetchOngById(params.ong_id);
@@ -65,17 +68,20 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
           <div className='flex items-center p-6'>
             <section className='flex w-full flex-col gap-3'>
               <h4 className='heading-4 text-muted-foreground'>Ações</h4>
-              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                {actions && actions.length > 0 ? (
-                  actions
-                    .slice(0, 6)
-                    .map((action) => (
-                      <OngActionCard key={action.id} action={action} />
-                    ))
-                ) : (
-                  <p>Essa ONG ainda não possui ações cadastradas.</p>
-                )}
-              </div>
+              {actions && actions.length > 0 ? (
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  {actions.slice(0, 6).map((action) => (
+                    <OngActionCard key={action.id} action={action} />
+                  ))}
+                </div>
+              ) : (
+                <Alert variant={"primary"}>
+                  <LuShieldAlert className='h-4 w-4' />
+                  <AlertDescription>
+                    A ong ainda não possui ações cadastradas.{" "}
+                  </AlertDescription>
+                </Alert>
+              )}
             </section>
           </div>
 
