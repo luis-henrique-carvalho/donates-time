@@ -6,17 +6,17 @@ import Link from "next/link";
 import UserNav from "@/components/molecules/UserNav";
 import { getServerSession } from "next-auth";
 import nextAuthOptions from "@/nextAuthOptions";
-
-type Props = {};
+import { fetchUserById } from "@/app/(private-routes)/(users)/actions";
 
 const SiteHeader = async () => {
   const session = await getServerSession(nextAuthOptions);
+  const { data: user } = await fetchUserById(session?.user.id);
 
   return (
     <header className='sticky top-0 z-50 w-full border-border/40 bg-background/95 px-5 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='container flex h-14 max-w-screen-2xl items-center'>
-        <MainNav />
-        <MobileNav />
+        <MainNav user={user} session={session} />
+        <MobileNav user={user} session={session} />
         <div className='flex flex-1 items-center justify-between space-x-2 md:justify-end'>
           <nav className='ml-auto flex items-center space-x-4'>
             {session ? (

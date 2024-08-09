@@ -16,13 +16,9 @@ import { LuShieldAlert } from "react-icons/lu";
 
 const ActionsCreate = async () => {
   const session = await getSessionUtils();
-  const user = await fetchUserById(session?.user.id);
+  const { data, error } = await fetchUserById(session?.user.id);
 
-  if (!user || "error" in user) {
-    return <div>Erro: {user.error || "Falha ao carregar usuário."}</div>;
-  }
-
-  const { ong } = user.data;
+  const ong = data?.ong;
 
   if (!ong) {
     return <ActionNoOngFound />;
@@ -37,15 +33,15 @@ const ActionsCreate = async () => {
           <AlertDescription>
             A ação será criada para a sua ONG:{" "}
             <Link
-              href={`/ongs/${ong.id}`}
+              href={`/ongs/${ong?.id}`}
               className='text-primary dark:text-white'
             >
-              {ong.name}
+              {ong?.name}
             </Link>
           </AlertDescription>
         </Alert>
         <div className='flex flex-grow flex-col gap-4'>
-          <ActionForm ong_id={ong.id} />
+          <ActionForm ong_id={ong?.id} />
         </div>
       </div>
     </PageContainer>

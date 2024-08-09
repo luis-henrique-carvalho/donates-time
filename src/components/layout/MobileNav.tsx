@@ -1,5 +1,4 @@
 "use client";
-// Flow
 import React from "react";
 // Components
 import {
@@ -10,19 +9,140 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import MobileLink from "@/components/molecules/MobileLink";
+
 // Icons
 import { IoMdMenu } from "react-icons/io";
+
 // Config
 import { siteConfig } from "@/config/site";
-import { configRoutes } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { Session } from "next-auth";
+import { IUser } from "@/app/(private-routes)/(users)/types/User";
 
-type Props = {};
+interface Props {
+  session?: Session | null;
+  user?: IUser | null | undefined;
+}
 
-const MobileNav = (props: Props) => {
+const MobileNav = ({ session, user }: Props) => {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const ong = user?.ong;
+
+  const renderNavMenuRoutes = () => {
+    return (
+      <nav className='my-4 flex flex-col gap-2 pb-10 pl-6'>
+        {renderOngsMenu()}
+        {renderActionsMenu()}
+      </nav>
+    );
+  };
+
+  const isOngSelected = (path: string) => pathname === path;
+
+  const renderOngsMenu = () => {
+    return (
+      <div>
+        <span className='text-lg font-bold'>Ongs</span>
+        <div className='ml-4 flex flex-col gap-1'>
+          <MobileLink href='/ongs' onOpenChange={setOpen}>
+            <span
+              className={cn(
+                "transition-colors hover:text-primary/80",
+                isOngSelected("/ongs") ? "text-primary" : "text-foreground/60"
+              )}
+            >
+              Listar Ongs
+            </span>
+          </MobileLink>
+          {session && (
+            <>
+              {ong ? (
+                <MobileLink href={`/ongs/${ong.id}`} onOpenChange={setOpen}>
+                  <span
+                    className={cn(
+                      "transition-colors hover:text-primary/80",
+                      isOngSelected(`/ongs/${ong.id}`)
+                        ? "text-primary"
+                        : "text-foreground/60"
+                    )}
+                  >
+                    Minha Ong
+                  </span>
+                </MobileLink>
+              ) : (
+                <MobileLink href='/ongs/create' onOpenChange={setOpen}>
+                  <span
+                    className={cn(
+                      "transition-colors hover:text-primary/80",
+                      isOngSelected("/ongs/create")
+                        ? "text-primary"
+                        : "text-foreground/60"
+                    )}
+                  >
+                    Criar Ong
+                  </span>
+                </MobileLink>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const renderActionsMenu = () => {
+    return (
+      <div>
+        <span className='text-lg font-bold'>Ação</span>
+        <div className='ml-4 flex flex-col gap-1'>
+          <MobileLink href='/actions' onOpenChange={setOpen}>
+            <span
+              className={cn(
+                "transition-colors hover:text-primary/80",
+                isOngSelected("/actions")
+                  ? "text-primary"
+                  : "text-foreground/60"
+              )}
+            >
+              Listar Ação
+            </span>
+          </MobileLink>
+          {session && (
+            <>
+              <MobileLink href='/actions/create' onOpenChange={setOpen}>
+                <span
+                  className={cn(
+                    "transition-colors hover:text-primary/80",
+                    isOngSelected("/actions/create")
+                      ? "text-primary"
+                      : "text-foreground/60"
+                  )}
+                >
+                  Criar Ação
+                </span>
+              </MobileLink>
+              {ong && (
+                <MobileLink href='/actions/my-actions' onOpenChange={setOpen}>
+                  <span
+                    className={cn(
+                      "transition-colors hover:text-primary/80",
+                      isOngSelected("/actions/my-actions")
+                        ? "text-primary"
+                        : "text-foreground/60"
+                    )}
+                  >
+                    Minhas Ações
+                  </span>
+                </MobileLink>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -33,46 +153,7 @@ const MobileNav = (props: Props) => {
         <SheetHeader>
           <SheetTitle>{siteConfig.name}</SheetTitle>
         </SheetHeader>
-        <nav className='my-4 flex flex-col gap-2 pb-10 pl-6'>
-          {configRoutes.navMenuRoutes.map((route) => (
-            <div key={route.href}>
-              <MobileLink href={route.href} onOpenChange={setOpen}>
-                <span
-                  className={cn(
-                    "transition-colors hover:text-primary/80",
-                    pathname === route.href
-                      ? "text-primary"
-                      : "text-foreground/60"
-                  )}
-                >
-                  {route.title}
-                </span>
-              </MobileLink>
-              {route.actions && (
-                <div className='ml-4 flex flex-col gap-1'>
-                  {route.actions.map((action) => (
-                    <MobileLink
-                      key={action.href}
-                      href={action.href}
-                      onOpenChange={setOpen}
-                    >
-                      <span
-                        className={cn(
-                          "transition-colors hover:text-primary/80",
-                          pathname === action.href
-                            ? "text-primary"
-                            : "text-foreground/60"
-                        )}
-                      >
-                        {action.title}
-                      </span>
-                    </MobileLink>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
+        {renderNavMenuRoutes()}
       </SheetContent>
     </Sheet>
   );

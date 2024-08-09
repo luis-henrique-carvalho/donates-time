@@ -5,12 +5,12 @@ import { IUserResponseUnique } from "../types/User";
 
 export const fetchUserById = async (
   user_id: string = ""
-): Promise<IUserResponseUnique | { error: string }> => {
+): Promise<IUserResponseUnique> => {
   const response = await UserService.getUserByID(user_id);
 
   if (!response || "error" in response) {
-    return { error: response.error || "Unknown error" };
+    return { data: null, error: response.error };
   }
 
-  return response;
+  return { data: response.data };
 };

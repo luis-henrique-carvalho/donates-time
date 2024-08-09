@@ -10,11 +10,19 @@ import {
 import React from "react";
 // Config
 import { siteConfig } from "@/config/site";
-import { configRoutes } from "@/config/routes";
 // Utils
 import { cn } from "@/lib/utils";
+import { Session } from "next-auth";
+import { IUser } from "@/app/(private-routes)/(users)/types/User";
 
-const MainNav = () => {
+interface MainNavProps {
+  session?: Session | null;
+  user?: IUser | null | undefined;
+}
+
+const MainNav = ({ session, user }: MainNavProps) => {
+  const ong = user?.ong;
+
   return (
     <div className='mr-4 hidden sm:flex'>
       <Link href='/' className='mr-4 flex items-center space-x-2 lg:mr-6'>
@@ -22,33 +30,51 @@ const MainNav = () => {
       </Link>
       <NavigationMenu>
         <NavigationMenuList className='border-none'>
-          {configRoutes.navMenuRoutes.map((route) => (
-            <NavigationMenuItem key={route.href}>
-              <NavigationMenuTrigger>{route.title}</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className='grid w-[300x] gap-3 p-4 md:w-[400px] md:grid-cols-2'>
-                  {route.actions?.map((action) => (
-                    <ListItem
-                      key={action.title}
-                      title={action.title}
-                      href={action.href}
-                    ></ListItem>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          ))}
+          {/* Ongs Menu */}
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Ongs</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className='grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-2'>
+                <div className={`${!session && "col-span-2 text-center"}`}>
+                  <ListItem title='Listar Ongs' href='/ongs' />
+                </div>
+                {user && (
+                  <>
+                    {ong ? (
+                      <ListItem title='Minha Ong' href={`/ongs/${ong.id}`} />
+                    ) : (
+                      <ListItem title='Criar Ong' href='/ongs/create' />
+                    )}
+                  </>
+                )}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          {/* Ação Menu */}
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Ação</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className='grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-2'>
+                <ListItem title='Listar Ações' href='/actions' />
+                {session && (
+                  <ListItem title='Criar Ação' href='/actions/create' />
+                )}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </div>
   );
 };
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
+interface ListItemProps extends React.ComponentPropsWithoutRef<"a"> {
+  title: string;
+}
+
+const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
+  ({ className, title, children, ...props }, ref) => (
     <li>
       <NavigationMenuLink asChild>
         <a
@@ -66,7 +92,9 @@ const ListItem = React.forwardRef<
         </a>
       </NavigationMenuLink>
     </li>
-  );
-});
+  )
+);
+
+ListItem.displayName = "ListItem";
 
 export default MainNav;
