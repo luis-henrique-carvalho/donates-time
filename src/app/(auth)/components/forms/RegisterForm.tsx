@@ -36,15 +36,15 @@ export function RegisterForm() {
   async function onSubmit(data: z.infer<typeof signUpSchema>) {
     setIsLoading(true);
 
-    const result = await signUpAction(data);
+    const { error, data: user } = await signUpAction(data);
 
     setIsLoading(false);
 
-    if (result?.error) {
+    if (error) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: result.error || "Invalid email or password",
+        description: error || "Invalid email or password",
       });
       return;
     }
