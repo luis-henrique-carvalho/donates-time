@@ -16,5 +16,6 @@ export const configRoutes: ConfigRoutes = {
   privateRoutes: [
     { title: "Create Ong", href: "/ongs/create" },
     { title: "Create Action", href: "/actions/create" },
+    { title: "My Ong", href: "/ongs/my-ong" },
   ],
 };

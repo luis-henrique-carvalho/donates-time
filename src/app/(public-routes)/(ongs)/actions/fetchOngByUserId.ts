@@ -1,12 +1,12 @@
 "use server";
 
 import { OngService } from "../services/ongs.service";
-import { IOng, IOngResponseUnique } from "../types";
+import { IOngResponseUnique } from "../types";
 
-export const fetchOngById = async (
-  ong_id: string
+export const fetchOngByUserId = async (
+  user_id?: string
 ): Promise<IOngResponseUnique> => {
-  const response = await OngService.getOngById(ong_id);
+  const response = await OngService.getOngByUserId(user_id);
 
   if (!response || "error" in response) {
     return { data: null, error: response.error };

@@ -23,6 +23,8 @@ interface MainNavProps {
 const MainNav = ({ session, user }: MainNavProps) => {
   const ong = user?.ong;
 
+  console.log(ong);
+
   return (
     <div className='mr-4 hidden sm:flex'>
       <Link href='/' className='mr-4 flex items-center space-x-2 lg:mr-6'>
@@ -41,7 +43,7 @@ const MainNav = ({ session, user }: MainNavProps) => {
                 {user && (
                   <>
                     {ong ? (
-                      <ListItem title='Minha Ong' href={`/ongs/${ong.id}`} />
+                      <ListItem title='Minha Ong' href={`/ongs/my-ong`} />
                     ) : (
                       <ListItem title='Criar Ong' href='/ongs/create' />
                     )}

@@ -30,18 +30,18 @@ const MobileNav = ({ session, user }: Props) => {
   const pathname = usePathname();
   const ong = user?.ong;
 
-  const renderNavMenuRoutes = () => {
+  const NavMenuRoutes = () => {
     return (
       <nav className='my-4 flex flex-col gap-2 pb-10 pl-6'>
-        {renderOngsMenu()}
-        {renderActionsMenu()}
+        <OngsMenuRoutes />
+        <ActionsMenuRoutes />
       </nav>
     );
   };
 
   const isOngSelected = (path: string) => pathname === path;
 
-  const renderOngsMenu = () => {
+  const OngsMenuRoutes = () => {
     return (
       <div>
         <span className='text-lg font-bold'>Ongs</span>
@@ -92,7 +92,7 @@ const MobileNav = ({ session, user }: Props) => {
     );
   };
 
-  const renderActionsMenu = () => {
+  const ActionsMenuRoutes = () => {
     return (
       <div>
         <span className='text-lg font-bold'>Ação</span>
@@ -153,7 +153,7 @@ const MobileNav = ({ session, user }: Props) => {
         <SheetHeader>
           <SheetTitle>{siteConfig.name}</SheetTitle>
         </SheetHeader>
-        {renderNavMenuRoutes()}
+        <NavMenuRoutes />
       </SheetContent>
     </Sheet>
   );

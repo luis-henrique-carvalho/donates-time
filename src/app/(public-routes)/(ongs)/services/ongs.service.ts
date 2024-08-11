@@ -27,21 +27,24 @@ export class OngService {
     }
   }
 
-  static async getOngById(
-    ong_id: string
-  ): Promise<IOngResponseUnique | { error: string }> {
+  static async getOngById(ong_id: string): Promise<IOngResponseUnique> {
     try {
       const response = await api.get(`api/v1/ongs/${ong_id}`);
       return response.data;
     } catch (error: any) {
-      return handleApiError(error, "An error occurred while fetching the ONG");
+      return {
+        data: null,
+        ...handleApiError(error, "An error occurred while fetching the ONG"),
+      };
     }
   }
 
-  static async getOngByUserId(): Promise<IOngResponse | { error: string }> {
+  static async getOngByUserId(user_id?: string): Promise<IOngResponseUnique> {
     try {
       const session = await getSessionUtils();
-      const response = await api.get(`api/v1/ongs/user/${session?.user?.id}`, {
+      const id = user_id || session?.user?.id;
+
+      const response = await api.get(`api/v1/users/${id}/ong`, {
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
         },
@@ -49,7 +52,11 @@ export class OngService {
 
       return response.data;
     } catch (error: any) {
-      return handleApiError(error, "An error occurred while fetching the ONG");
+      console.log(error);
+      return {
+        data: null,
+        ...handleApiError(error),
+      };
     }
   }
 

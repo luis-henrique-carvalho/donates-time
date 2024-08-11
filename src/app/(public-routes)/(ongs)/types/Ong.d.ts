@@ -15,6 +15,10 @@ export interface IOng {
   created_at: date;
   updated_at: string;
   user?: ISignUp;
+  volunteers_total: number;
+  confirmed_volunteers?: number;
+  actions_slots_total?: number;
+  actions_slots_available?: number;
   actions?: IAction[];
 }
 
@@ -29,5 +33,6 @@ export interface ICreateOngResponse {
 }
 
 export interface IOngResponseUnique {
-  data: IOng;
+  data: IOng | null;
+  error?: string;
 }

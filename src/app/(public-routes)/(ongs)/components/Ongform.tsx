@@ -64,7 +64,7 @@ const Ongform = () => {
 
     setIsLoading(false);
 
-    router.push(`/ongs`);
+    router.replace(`/ongs`);
   }
 
   return (

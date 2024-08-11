@@ -16,7 +16,7 @@ type Props = {
   ong: IOng;
 };
 
-const AsideOngCard: React.FC<Props> = ({ ong }) => {
+const OngAsideCard: React.FC<Props> = ({ ong }) => {
   const { name, description, email, created_at } = ong;
 
   const formattedCreatedAt = format(new Date(created_at), "dd/MM/yyyy");
@@ -63,4 +63,4 @@ const AsideOngCard: React.FC<Props> = ({ ong }) => {
   );
 };
 
-export default AsideOngCard;
+export default OngAsideCard;
