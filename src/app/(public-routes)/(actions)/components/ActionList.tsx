@@ -1,6 +1,7 @@
 import React from "react";
 // Components
 import ActionCard from "./ActionCard";
+// Types
 import { IAction } from "../types";
 
 interface Props {
