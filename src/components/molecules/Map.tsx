@@ -33,9 +33,6 @@ const MapComponent = ({
         zoom={defaultMapZoom}
         options={defaultMapOptions}
         mapContainerClassName={className}
-        onClick={(e) => {
-          console.log(e.latLng?.lat(), e.latLng?.lng());
-        }}
       ></GoogleMap>
     </div>
   );
