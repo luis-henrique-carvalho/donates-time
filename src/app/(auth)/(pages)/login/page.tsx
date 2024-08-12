@@ -1,6 +1,7 @@
-// Components
+// Next
 import Image from "next/image";
 import Link from "next/link";
+// Components
 import { LoginForm } from "../../components/forms/LoginForm";
 
 const Login = () => {
