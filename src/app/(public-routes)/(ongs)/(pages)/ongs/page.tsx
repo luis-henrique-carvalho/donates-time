@@ -1,11 +1,14 @@
 import React, { Suspense } from "react";
+// Actions
 import { fetchOngs } from "../../actions";
-import { IOngResponse } from "../../types";
+// Components
 import OngList from "../../components/OngList";
 import PageContainer from "@/components/layout/PageContainer";
 import Search from "@/components/molecules/Seach";
 import { SkeletonCard } from "@/components/molecules/SkeletonCard";
 import Págination from "@/components/molecules/Pagination";
+// Types
+import { IOngResponse } from "../../types";
 
 const OngsPage = async ({
   searchParams,
