@@ -58,7 +58,9 @@ const MainNav = ({ session, user }: MainNavProps) => {
             <NavigationMenuTrigger>Ação</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className='grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-2'>
-                <ListItem title='Listar Ações' href='/actions' />
+                <div className={`${!session && "col-span-2 text-center"}`}>
+                  <ListItem title='Listar Ações' href='/actions' />
+                </div>
                 {session && (
                   <ListItem title='Criar Ação' href='/actions/create' />
                 )}
