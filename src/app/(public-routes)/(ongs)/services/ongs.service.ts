@@ -1,7 +1,12 @@
 // Service
 import { api } from "@/services/api.service";
 // Types
-import { IOngResponse, ICreateOngResponse, IOngResponseUnique } from "../types";
+import {
+  IOngResponse,
+  ICreateOngResponse,
+  IOngResponseUnique,
+  IOngPostOrPatch,
+} from "../types";
 // Schema
 import { ongFormData } from "../schema";
 // Utils
@@ -60,9 +65,7 @@ export class OngService {
     }
   }
 
-  static async createOngService(
-    data: ongFormData
-  ): Promise<ICreateOngResponse | { error: string }> {
+  static async createOngService(data: ongFormData): Promise<IOngPostOrPatch> {
     try {
       const session = await getSessionUtils();
       const response = await api.post("api/v1/ongs", data, {
@@ -71,9 +74,32 @@ export class OngService {
         },
       });
 
-      return response.data;
+      return { data: response.data };
     } catch (error: any) {
-      return handleApiError(error, "An error occurred while creating the ONG");
+      return {
+        data: { ong: null },
+        ...handleApiError(error),
+      };
+    }
+  }
+
+  static async updateOngService(
+    data: ongFormData,
+    id: string
+  ): Promise<IOngPostOrPatch> {
+    try {
+      const session = await getSessionUtils();
+      const response = await api.put(`api/v1/ongs/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      });
+      return { data: response.data };
+    } catch (error: any) {
+      return {
+        data: { ong: null },
+        ...handleApiError(error),
+      };
     }
   }
 }

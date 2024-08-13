@@ -1,18 +1,11 @@
 import React from "react";
 // Actions
-
-// Components
-
-//  Icons
-
-// Next
-
 import { fetchOngByUserId } from "@/app/(public-routes)/(ongs)/actions";
-import PageContainer from "@/components/layout/PageContainer";
-
+// Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import PageContainer from "@/components/layout/PageContainer";
 import MyOngOverview from "./components/MyOngOverview";
+import MyOngEdit from "./components/MyOngEdit";
 
 const MyOng = async () => {
   const { data: ong, error } = await fetchOngByUserId();
@@ -24,16 +17,15 @@ const MyOng = async () => {
           <PageContainer title='Minha Ong'>
             <Tabs defaultValue='overview' className='space-y-4'>
               <TabsList>
-                <TabsTrigger value='overview'>Overview</TabsTrigger>
-                <TabsTrigger value='analytics' disabled>
-                  Analytics
-                </TabsTrigger>
-                <TabsTrigger value='reports' disabled>
-                  Reports
-                </TabsTrigger>
+                <TabsTrigger value='overview'>Visão geral</TabsTrigger>
+                <TabsTrigger value='edit'>Editar</TabsTrigger>
+                <TabsTrigger value='volunteers'>Reports</TabsTrigger>
               </TabsList>
               <TabsContent value='overview' className='space-y-4'>
                 <MyOngOverview ong={ong} />
+              </TabsContent>
+              <TabsContent value='edit' className='space-y-4'>
+                <MyOngEdit ong={ong} />
               </TabsContent>
             </Tabs>
           </PageContainer>

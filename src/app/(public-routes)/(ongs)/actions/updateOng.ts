@@ -2,13 +2,13 @@
 
 import { ongFormData } from "../schema";
 import { OngService } from "../services/ongs.service";
-import { ICreateOngResponse } from "../types";
-import { IOngPostOrPatch } from "../types/Ong";
+import { IOngPostOrPatch } from "../types";
 
-export const createOng = async (
-  data: ongFormData
+export const updateOng = async (
+  data: ongFormData,
+  id: string
 ): Promise<IOngPostOrPatch> => {
-  const response = await OngService.createOngService(data);
+  const response = await OngService.updateOngService(data, id);
 
   if (!response || "error" in response) {
     return { data: { ong: null }, error: response.error };
