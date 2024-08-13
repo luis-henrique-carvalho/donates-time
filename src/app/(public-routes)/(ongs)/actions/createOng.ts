@@ -1,8 +1,9 @@
 "use server";
-
-import { ongFormData } from "../schema";
+// Services
 import { OngService } from "../services/ongs.service";
-import { ICreateOngResponse } from "../types";
+// Schema
+import { ongFormData } from "../schema";
+// Types
 import { IOngPostOrPatch } from "../types/Ong";
 
 export const createOng = async (

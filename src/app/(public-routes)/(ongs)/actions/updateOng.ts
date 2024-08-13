@@ -1,7 +1,9 @@
 "use server";
-
-import { ongFormData } from "../schema";
+// Services
 import { OngService } from "../services/ongs.service";
+// Schema
+import { ongFormData } from "../schema";
+// Types
 import { IOngPostOrPatch } from "../types";
 
 export const updateOng = async (

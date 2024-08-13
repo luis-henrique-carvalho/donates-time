@@ -1,12 +1,7 @@
 // Service
 import { api } from "@/services/api.service";
 // Types
-import {
-  IOngResponse,
-  ICreateOngResponse,
-  IOngResponseUnique,
-  IOngPostOrPatch,
-} from "../types";
+import { IOngResponse, IOngResponseUnique, IOngPostOrPatch } from "../types";
 // Schema
 import { ongFormData } from "../schema";
 // Utils

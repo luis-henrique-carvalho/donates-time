@@ -1,17 +1,22 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
+// Zod
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
-import { ongFormData, ongSchema } from "../schema";
-
+// Components
 import { Form } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { IOng } from "../types";
-import { createOng, updateOng } from "../actions";
 import FormFieldWithLabel from "@/components/molecules/FormFieldWithLabel";
+// Types
+import { ongFormData, ongSchema } from "../schema";
+import { IOng } from "../types";
+// Actions
+import { createOng, updateOng } from "../actions";
+// Hooks
+import { useForm } from "react-hook-form";
+// Next
+import { useRouter } from "next/navigation";
 
 interface OngFormProps {
   ong?: IOng;
@@ -53,8 +58,6 @@ const OngForm = ({ ong }: OngFormProps) => {
         title: "Success",
         description: response.data.message,
       });
-
-      console.log(isUpdate);
     }
 
     setIsLoading(false);

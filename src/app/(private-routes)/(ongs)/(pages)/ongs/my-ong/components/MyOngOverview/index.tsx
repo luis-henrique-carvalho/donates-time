@@ -1,4 +1,5 @@
 import React from "react";
+// Components
 import {
   Card,
   CardContent,
@@ -6,15 +7,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { IOng } from "@/app/(public-routes)/(ongs)/types";
-import { format } from "date-fns";
-import { Separator } from "@radix-ui/react-dropdown-menu";
-import { BiSolidCategory } from "react-icons/bi";
+import { Separator } from "@/components/ui/separator";
+import StatsCard from "@/components/molecules/StatsCard";
 import MyOngActionsTable from "../MyOngActionsTable";
+// Types
+import { IOng } from "@/app/(public-routes)/(ongs)/types";
+// Utils
+import { format } from "date-fns";
+// Icons
+import { BiSolidCategory } from "react-icons/bi";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import StatsCard from "@/components/molecules/StatsCard";
-import { IAction } from "@/app/(public-routes)/(actions)/types";
 import { ClipboardCheck, ClipboardPen, Pickaxe, Users } from "lucide-react";
 
 type Props = {

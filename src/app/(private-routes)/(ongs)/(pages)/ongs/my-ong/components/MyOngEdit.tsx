@@ -1,18 +1,13 @@
-import Ongform from "@/app/(public-routes)/(ongs)/components/Ongform";
-import { IOng } from "@/app/(public-routes)/(ongs)/types";
 import React from "react";
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
-
-type Props = {
+// Components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// Types
+import { IOng } from "@/app/(public-routes)/(ongs)/types";
+// Form
+import Ongform from "@/app/(public-routes)/(ongs)/components/Ongform";
+interface Props {
   ong: IOng;
-};
+}
 
 function MyOngEdit({ ong }: Props) {
   return (
