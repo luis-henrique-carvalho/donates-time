@@ -30,7 +30,7 @@ const ActionsCreate = async () => {
           icon={<LuShieldAlert className='h-4 w-4' />}
           title='Atenção!'
           description='A ação será criada para a sua ONG: '
-          linkHref={`/ongs/${ong?.id}`}
+          linkHref={`/ongs/my-ong`}
           linkText={ong?.name || ""}
         />
         <div className='flex flex-grow flex-col gap-4'>
