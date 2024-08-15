@@ -31,7 +31,7 @@ const MyOng = async () => {
           </PageContainer>
         </>
       ) : (
-        <div>{error}</div>
+        <PageContainer title='Erro'>{error}</PageContainer>
       )}
     </>
   );

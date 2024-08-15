@@ -26,11 +26,8 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { actionFormData, actionSchema } from "../actions/schema";
-import {
-  actionDefaultValues,
-  IactionCategory,
-} from "../actions/schema/actionSchema";
+import { actionFormData, actionSchema } from "../schema";
+import { IactionCategory } from "../schema/actionSchema";
 
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -43,25 +40,44 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { createAction } from "../actions/createAction";
+import { IAction } from "../types";
+import { updateAction, createAction } from "../actions";
 
 interface Props {
   ong_id: string;
+  action?: IAction;
 }
 
-const ActionForm = ({ ong_id }: Props) => {
+const ActionForm = ({ ong_id, action }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
+  const from_date = action?.start_date
+    ? new Date(action.start_date)
+    : new Date();
+  const to_date = action?.end_date ? new Date(action.end_date) : new Date();
+
   const form = useForm<actionFormData>({
     resolver: zodResolver(actionSchema),
-    defaultValues: actionDefaultValues,
+    defaultValues: {
+      title: action?.title || "",
+      category: action?.category || IactionCategory.Education,
+      max_volunteers: action?.max_volunteers || 0,
+      dateRange: {
+        from: from_date,
+        to: to_date,
+      },
+      description: action?.description || "",
+      ong_id,
+    },
   });
 
-  async function onSubmit(data: actionFormData) {
+  async function handleSubmission(data: actionFormData, isUpdate: boolean) {
     setIsLoading(true);
-    const response = await createAction({ ...data, ong_id });
+    const response = isUpdate
+      ? await updateAction(data, action?.id!)
+      : await createAction(data);
 
     if ("error" in response) {
       toast({
@@ -69,20 +85,21 @@ const ActionForm = ({ ong_id }: Props) => {
         title: "Error",
         description: response.error,
       });
-      setIsLoading(false);
-      return;
+    } else {
+      toast({
+        variant: "default",
+        title: "Success",
+        description: response.data.message,
+      });
     }
-
-    toast({
-      variant: "primary",
-      title: "Success",
-      description: response.message,
-    });
 
     setIsLoading(false);
 
-    router.push(`/actions`);
+    router.push(`/ongs/my-ong`);
   }
+
+  const onSubmit = (data: actionFormData) =>
+    handleSubmission(data, !!action?.id);
 
   return (
     <Form {...form}>
@@ -219,7 +236,11 @@ const ActionForm = ({ ong_id }: Props) => {
           )}
         />
         <Button className='mt-10 w-full' type='submit' disabled={isLoading}>
-          {isLoading ? "Loading..." : "Criar Ação"}
+          {isLoading
+            ? "Loading..."
+            : action?.id
+              ? "Atualizar Ação"
+              : "Criar Ação"}
         </Button>
       </form>
     </Form>

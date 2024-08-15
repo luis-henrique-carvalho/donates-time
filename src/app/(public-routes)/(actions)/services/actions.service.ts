@@ -1,14 +1,15 @@
 import { api } from "@/services/api.service";
 // Types
 import {
+  IActionPostOrPatch,
   IActionResponse,
   IActionResponseUnique,
   ICreateActionResponse,
 } from "../types";
 // Utils
-import { getSessionUtils } from "@/utils";
+import { getSessionUtils, handleApiError } from "@/utils";
 // Schema
-import { actionFormData } from "../actions/schema";
+import { actionFormData } from "../schema";
 
 export class ActionService {
   static async getActions(
@@ -34,20 +35,21 @@ export class ActionService {
 
   static async getActionById(
     action_id: string
-  ): Promise<IActionResponseUnique | { error: string }> {
+  ): Promise<IActionResponseUnique> {
     try {
       const response = await api.get(`api/v1/actions/${action_id}`);
       return response.data;
     } catch (error: any) {
       return {
-        error: error.response.data.errors || "An error occurred",
+        data: null,
+        ...handleApiError(error, "An error occurred while fetching the ONG"),
       };
     }
   }
 
   static async createActionService(
     data: actionFormData
-  ): Promise<ICreateActionResponse | { error: string }> {
+  ): Promise<IActionPostOrPatch> {
     const session = await getSessionUtils();
     const body = {
       start_date: data.dateRange.from,
@@ -65,7 +67,35 @@ export class ActionService {
       return response.data;
     } catch (error: any) {
       return {
-        error: error.response.data.errors || "An error occurred",
+        data: { action: null },
+        ...handleApiError(error),
+      };
+    }
+  }
+
+  static async updateActionService(
+    data: actionFormData,
+    id: string
+  ): Promise<IActionPostOrPatch> {
+    const session = await getSessionUtils();
+    const body = {
+      start_date: data.dateRange.from,
+      end_date: data.dateRange.to,
+      ...data,
+    };
+
+    try {
+      const response = await api.put(`api/v1/actions/${id}`, body, {
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return {
+        data: { action: null },
+        ...handleApiError(error),
       };
     }
   }

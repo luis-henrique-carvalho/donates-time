@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { format } from "date-fns";
+import Link from "next/link";
 
 import { IAction } from "@/app/(public-routes)/(actions)/types";
 
@@ -91,7 +92,8 @@ export const columns: ColumnDef<IAction>[] = [
   },
   {
     id: "actions",
-    enableHiding: false,
+    header: "Ações",
+    enableHiding: true,
     cell: ({ row }) => {
       const IAction = row.original;
 
@@ -108,11 +110,15 @@ export const columns: ColumnDef<IAction>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(IAction.id)}
             >
-              Copy IAction ID
+              Codiar ID da ação
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View IAction details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/actions/${IAction.id}`}>Ver detalhes</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/actions/${IAction.id}/edit`}>Editar</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

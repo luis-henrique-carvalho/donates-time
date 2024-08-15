@@ -52,7 +52,6 @@ export class OngService {
 
       return response.data;
     } catch (error: any) {
-      console.log(error);
       return {
         data: null,
         ...handleApiError(error),
