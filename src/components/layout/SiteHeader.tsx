@@ -4,12 +4,11 @@ import MobileNav from "./MobileNav";
 import ThemeToggle from "../molecules/ThemeToggle";
 import Link from "next/link";
 import UserNav from "@/components/molecules/UserNav";
-import { getServerSession } from "next-auth";
-import nextAuthOptions from "@/nextAuthOptions";
 import { fetchUserById } from "@/app/(private-routes)/(users)/actions";
+import { getSessionUtils } from "@/utils";
 
 const SiteHeader = async () => {
-  const session = await getServerSession(nextAuthOptions);
+  const session = await getSessionUtils();
   const { data: user } = await fetchUserById(session?.user.id);
 
   return (
