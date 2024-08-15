@@ -91,11 +91,10 @@ const ActionForm = ({ ong_id, action }: Props) => {
         title: "Success",
         description: response.data.message,
       });
+      router.push(`/ongs/my-ong`);
     }
 
     setIsLoading(false);
-
-    router.push(`/ongs/my-ong`);
   }
 
   const onSubmit = (data: actionFormData) =>

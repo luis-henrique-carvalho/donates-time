@@ -10,6 +10,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import StatsCard from "@/components/molecules/StatsCard";
 import MyOngActionsTable from "../MyOngActionsTable";
+import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 // Types
 import { IOng } from "@/app/(public-routes)/(ongs)/types";
 // Utils
@@ -56,13 +58,13 @@ const MyOngOverview = ({ ong }: Props) => {
 
         <StatsCard
           title='Vagas Totais'
-          value={`${actions_slots_total} vagas totais`}
+          value={`${actions_slots_total || 0} vagas totais`}
           description='Total de vagas disponíveis'
           icon={<ClipboardPen className='text-primary' />}
         />
         <StatsCard
           title='Vagas Disponíveis'
-          value={`${actions_slots_available} vagas disponíveis`}
+          value={`${actions_slots_available || 0} vagas disponíveis`}
           description='Total de vagas disponíveis'
           icon={<ClipboardCheck className='text-primary' />}
         />
@@ -76,7 +78,15 @@ const MyOngOverview = ({ ong }: Props) => {
       <div className='grid grid-cols-1 gap-4 lg:grid-cols-9'>
         <Card className='lg:col-span-6'>
           <CardHeader>
-            <CardTitle>Lista de Ações</CardTitle>
+            <div className='flex items-center justify-between gap-2'>
+              <CardTitle>Lista de Ações</CardTitle>
+              <Link
+                className={buttonVariants({ variant: "default" })}
+                href={`/actions/create`}
+              >
+                Criar Ação
+              </Link>
+            </div>
           </CardHeader>
           <CardContent className='pl-2'>
             <MyOngActionsTable data={actions || []} />

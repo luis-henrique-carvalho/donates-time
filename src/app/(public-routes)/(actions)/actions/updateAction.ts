@@ -18,7 +18,5 @@ export const updateAction = async (
     return { data: { action: null }, error: response.error };
   }
 
-  return {
-    data: { action: response.data.action, message: response.data.message },
-  };
+  return response;
 };

@@ -91,7 +91,9 @@ export class ActionService {
         },
       });
 
-      return response.data;
+      return {
+        data: { action: response.data.data, message: response.data.message },
+      };
     } catch (error: any) {
       return {
         data: { action: null },
