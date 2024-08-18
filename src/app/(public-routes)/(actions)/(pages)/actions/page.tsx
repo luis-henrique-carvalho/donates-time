@@ -2,10 +2,11 @@ import React, { Suspense } from "react";
 // Components
 import ActionList from "../../components/ActionList";
 import PageContainer from "@/components/layout/PageContainer";
-import { fetchActions } from "../../actions";
 import { SkeletonCard } from "@/components/molecules/SkeletonCard";
 import Págination from "@/components/molecules/Pagination";
 import Search from "@/components/molecules/Seach";
+// Actions
+import { fetchActions } from "../../actions";
 
 const Actions = async ({
   searchParams,
