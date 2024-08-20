@@ -101,4 +101,24 @@ export class ActionService {
       };
     }
   }
+
+  static async deleteActionService(
+    action_id: string
+  ): Promise<IActionResponseUnique> {
+    try {
+      const session = await getSessionUtils();
+      const response = await api.delete(`api/v1/actions/${action_id}`, {
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return {
+        data: null,
+        ...handleApiError(error, "An error occurred while deleting the action"),
+      };
+    }
+  }
 }
