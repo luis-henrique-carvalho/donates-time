@@ -61,14 +61,17 @@ const CreateVolunteerButton: React.FC<Props> = ({ action_id }) => {
   return (
     <Dialog open={modalOpen} onOpenChange={setModalOpen}>
       <Button variant='default' onClick={() => setModalOpen(true)}>
-        Subscribe
+        Inscreva se
       </Button>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle>
+            Você tem certeza que deseja se inscrever nesta ação?
+          </DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Ao clicar em "Inscreva-se", você estará se se compromentendo a
+            participar desta ação. Você poderá cancelar a inscrição a qualquer
+            momento.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className='sm:justify-start'>

@@ -147,7 +147,7 @@ export function DataTable({ data, columns }: Props) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  Sem resultados
                 </TableCell>
               </TableRow>
             )}
@@ -156,8 +156,8 @@ export function DataTable({ data, columns }: Props) {
       </div>
       <div className='flex items-center justify-end space-x-2 py-4'>
         <div className='flex-1 text-sm text-muted-foreground'>
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} de{" "}
+          {table.getFilteredRowModel().rows.length} linha(s) selecionada(s)
         </div>
         <div className='space-x-2'>
           <Button
@@ -166,7 +166,7 @@ export function DataTable({ data, columns }: Props) {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant='outline'
@@ -174,7 +174,7 @@ export function DataTable({ data, columns }: Props) {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Próximo
           </Button>
         </div>
       </div>

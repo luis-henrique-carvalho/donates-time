@@ -85,12 +85,12 @@ export function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <div className='flex w-full justify-between'>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Senha</FormLabel>
                 <Link
                   href='/forgot-password'
                   className='ml-auto inline-block text-sm underline'
                 >
-                  Forgot your password?
+                  Esqueceu a senha?
                 </Link>
               </div>
               <FormControl>
@@ -107,9 +107,9 @@ export function LoginForm() {
         <Button className='w-full' type='submit' disabled={isLoading}>
           {isLoading ? "Loading..." : "Login"}
         </Button>
-        <Button variant='outline' className='w-full'>
+        {/* <Button variant='outline' className='w-full'>
           Login with Google
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );

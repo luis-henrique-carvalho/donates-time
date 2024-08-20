@@ -64,7 +64,7 @@ export default function Págination({ pagy }: PaginationProps) {
           <>
             <PaginationItem>
               <PaginationLink onClick={() => navigateToPage(1)}>
-                First
+                Primeira
               </PaginationLink>
             </PaginationItem>
             {visiblePages[0] > 2 && (
@@ -103,7 +103,7 @@ export default function Págination({ pagy }: PaginationProps) {
             )}
             <PaginationItem>
               <PaginationLink onClick={() => navigateToPage(totalPages)}>
-                Last
+                Última
               </PaginationLink>
             </PaginationItem>
           </>

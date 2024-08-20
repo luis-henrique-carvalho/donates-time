@@ -90,7 +90,7 @@ export function RegisterForm() {
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Senha</FormLabel>
               <FormControl>
                 <Input
                   type='password'
@@ -108,7 +108,7 @@ export function RegisterForm() {
           name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Nome</FormLabel>
               <FormControl>
                 <Input type='name' placeholder='Digite seu nome' {...field} />
               </FormControl>
@@ -120,9 +120,9 @@ export function RegisterForm() {
         <Button className='w-full' type='submit' disabled={isLoading}>
           {isLoading ? "Loading..." : "Create an account"}
         </Button>
-        <Button variant='outline' className='w-full'>
+        {/* <Button variant='outline' className='w-full'>
           Login with Google
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );

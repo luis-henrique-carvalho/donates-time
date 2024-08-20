@@ -127,17 +127,17 @@ export const columns: ColumnDef<IAction>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='ghost' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Open menu</span>
+              <span className='sr-only'>Abrir Menu</span>
               <MoreHorizontal className='h-4 w-4' />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
               className='cursor-pointer'
               onClick={() => navigator.clipboard.writeText(IAction.id)}
             >
-              Codiar ID da ação
+              Copiar ID da ação
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

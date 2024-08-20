@@ -123,7 +123,7 @@ const ActionForm = ({ ong_id, action }: Props) => {
             name='dateRange'
             render={({ field }) => (
               <FormItem className='sm:w-1/2'>
-                <FormLabel>Start and End Date</FormLabel>
+                <FormLabel>Data de Início e Fim</FormLabel>
                 <Popover modal={true}>
                   <PopoverTrigger asChild>
                     <Button
@@ -145,7 +145,7 @@ const ActionForm = ({ ong_id, action }: Props) => {
                           format(field.value.from, "LLL dd, y")
                         )
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Selecione a Data</span>
                       )}
                     </Button>
                   </PopoverTrigger>
@@ -163,7 +163,9 @@ const ActionForm = ({ ong_id, action }: Props) => {
                     />
                   </PopoverContent>
                 </Popover>
-                <FormDescription>Select the start and end date</FormDescription>
+                <FormDescription>
+                  Selecione a data de início e fim da ação.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -228,7 +230,7 @@ const ActionForm = ({ ong_id, action }: Props) => {
                 />
               </FormControl>
               <FormDescription>
-                You can <span>@mention</span> other users and organizations.
+                Descreva a ação que será realizada.
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -43,7 +43,7 @@ const UserNav = ({ session }: UserNavProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
+            Perfil
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
