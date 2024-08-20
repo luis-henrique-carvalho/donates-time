@@ -5,7 +5,7 @@ interface ContainerProps {
 }
 
 const Container = ({ children }: ContainerProps) => {
-  return <div className='items-center rounded py-5'>{children}</div>;
+  return <div className='h-screen items-center rounded py-5'>{children}</div>;
 };
 
 export default Container;
