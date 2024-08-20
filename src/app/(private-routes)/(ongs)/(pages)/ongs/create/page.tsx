@@ -1,15 +1,22 @@
 import Ongform from "@/app/(public-routes)/(ongs)/components/Ongform";
 import PageContainer from "@/components/layout/PageContainer";
-import { getSessionUtils } from "@/utils";
+import { fetchOngByUserId } from "@/app/(public-routes)/(ongs)/actions/fetchOngByUserId";
+import CannotProceed from "@/components/layout/CannotProceed";
 import { redirect } from "next/navigation";
-
 import React from "react";
 
 const OngsCreate = async () => {
-  const session = await getSessionUtils();
+  const ongByUser = await fetchOngByUserId();
 
-  if (session?.user?.ong) {
-    redirect("/ongs/my-ong");
+  if (ongByUser.data) {
+    return (
+      <CannotProceed
+        pageTitle='Não é possível prosseguir'
+        title='Você já possui uma ONG cadastrada'
+        description='Você já possui uma ONG cadastrada, clique no botão abaixo para acessar a página da sua ONG'
+        link='/ongs/my-ong'
+      />
+    );
   }
 
   return (

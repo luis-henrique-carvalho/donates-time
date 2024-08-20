@@ -65,7 +65,7 @@ const OngForm = ({ ong }: OngFormProps) => {
     if (isUpdate) {
       router.refresh();
     } else {
-      router.push(`/ongs`);
+      router.replace(`/ongs`);
     }
   };
 
