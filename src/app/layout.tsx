@@ -9,6 +9,8 @@ import Container from "@/components/layout/Container";
 import { Toaster } from "@/components/ui/toaster";
 import { MapProvider } from "@/providers/MapProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import LoadingPage from "@/components/layout/LoadingPage";
+import { Suspense } from "react";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -36,15 +38,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
             enableSystem
             disableTransitionOnChange
           >
-            <MapProvider>
-              <SiteHeader />
-              <Container>
-                {children}
-                <SiteFooter />
-              </Container>
+            <Suspense fallback={<LoadingPage />}>
+              <MapProvider>
+                <SiteHeader />
+                <Container>
+                  {children}
+                  <SiteFooter />
+                </Container>
 
-              <Toaster />
-            </MapProvider>
+                <Toaster />
+              </MapProvider>
+            </Suspense>
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
