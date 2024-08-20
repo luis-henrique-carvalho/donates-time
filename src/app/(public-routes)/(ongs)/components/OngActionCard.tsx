@@ -21,6 +21,7 @@ type Props = {
 
 const OngActionCard = ({ action }: Props) => {
   const vacancies = action.max_volunteers - action.volunteer_count;
+
   return (
     <Card className='flex h-36 items-center justify-between bg-card/60 p-4'>
       <picture className='relative h-full w-2/5'>

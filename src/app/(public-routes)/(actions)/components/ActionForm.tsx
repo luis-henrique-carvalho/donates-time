@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 // Hooks
@@ -42,6 +42,7 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { IAction } from "../types";
 import { updateAction, createAction } from "../actions";
+import Link from "next/link";
 
 interface Props {
   ong_id: string;
@@ -236,13 +237,23 @@ const ActionForm = ({ ong_id, action }: Props) => {
             </FormItem>
           )}
         />
-        <Button className='mt-10 w-full' type='submit' disabled={isLoading}>
-          {isLoading
-            ? "Loading..."
-            : action?.id
-              ? "Atualizar Ação"
-              : "Criar Ação"}
-        </Button>
+        <div className='flex w-full items-center justify-between gap-5'>
+          {action?.id && (
+            <Link
+              className={`mt-10 w-full ${buttonVariants({ variant: "outline" })}`}
+              href={`/ongs/my-ong`}
+            >
+              Cancelar
+            </Link>
+          )}
+          <Button className='mt-10 w-full' type='submit' disabled={isLoading}>
+            {isLoading
+              ? "Loading..."
+              : action?.id
+                ? "Atualizar Ação"
+                : "Criar Ação"}
+          </Button>
+        </div>
       </form>
     </Form>
   );
