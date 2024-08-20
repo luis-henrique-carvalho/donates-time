@@ -20,6 +20,7 @@ type Props = {
 };
 
 const OngActionCard = ({ action }: Props) => {
+  const vacancies = action.max_volunteers - action.volunteer_count;
   return (
     <Card className='flex h-36 items-center justify-between bg-card/60 p-4'>
       <picture className='relative h-full w-2/5'>
@@ -41,7 +42,7 @@ const OngActionCard = ({ action }: Props) => {
         </CardHeader>
 
         <CardFooter className='justify-between p-2'>
-          <p>16 vagas</p>
+          <p>{vacancies} vagas</p>
           <Link
             className={`${buttonVariants({ variant: "default" })} w-1/2`}
             href={`/actions/${action.id}`}
