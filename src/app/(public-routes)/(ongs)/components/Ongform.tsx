@@ -1,49 +1,50 @@
 "use client";
 
 import { useState } from "react";
+// Zod
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+// Components
+import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
-import { ongFormData, ongSchema } from "../schema";
-
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { IongCategory } from "../schema/ongSchema";
-import { Textarea } from "@/components/ui/textarea";
-import { createOng } from "../actions/createOng";
+import FormFieldWithLabel from "@/components/molecules/FormFieldWithLabel";
+// Types
+import { ongFormData, ongSchema } from "../schema";
+import { IOng } from "../types";
+// Actions
+import { createOng, updateOng } from "../actions";
+// Hooks
+import { useForm } from "react-hook-form";
+// Next
+import { useRouter } from "next/navigation";
 
-const Ongform = () => {
+interface OngFormProps {
+  ong?: IOng;
+}
+
+const OngForm = ({ ong }: OngFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
   const form = useForm<ongFormData>({
     resolver: zodResolver(ongSchema),
+    defaultValues: {
+      name: ong?.name,
+      email: ong?.email,
+      category: ong?.category,
+      city: ong?.city,
+      state: ong?.state,
+      description: ong?.description,
+    },
   });
 
-  async function onSubmit(data: ongFormData) {
+  const handleSubmission = async (data: ongFormData, isUpdate: boolean) => {
     setIsLoading(true);
-    const response = await createOng(data);
+
+    const response = isUpdate
+      ? await updateOng(data, ong?.id!)
+      : await createOng(data);
 
     if ("error" in response) {
       toast({
@@ -51,133 +52,80 @@ const Ongform = () => {
         title: "Error",
         description: response.error,
       });
-      setIsLoading(false);
-
-      return;
+    } else {
+      toast({
+        variant: "default",
+        title: "Success",
+        description: response.data.message,
+      });
     }
-
-    toast({
-      variant: "primary",
-      title: "Success",
-      description: `Ong ${response.data.name} criada com sucesso`,
-    });
 
     setIsLoading(false);
 
-    router.push(`/ongs`);
-  }
+    if (isUpdate) {
+      router.refresh();
+    } else {
+      router.push(`/ongs`);
+    }
+  };
+
+  const onSubmit = (data: ongFormData) => handleSubmission(data, !!ong?.id);
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-5'>
-        <FormField
+        <FormFieldWithLabel
           control={form.control}
           name='name'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nome da Ong</FormLabel>
-              <FormControl>
-                <Input placeholder='Digite o Nome da Ong' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label='Nome da Ong'
+          placeholder='Digite o Nome da Ong'
         />
         <div className='flex flex-col justify-between gap-4 sm:flex-row'>
-          <FormField
+          <FormFieldWithLabel
             control={form.control}
             name='email'
-            render={({ field }) => (
-              <FormItem className='sm:w-1/2'>
-                <FormLabel>E-mail</FormLabel>
-                <FormControl>
-                  <Input placeholder='Digite o E-mail da Ong' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label='E-mail'
+            placeholder='Digite o E-mail da Ong'
+            className='sm:w-1/2'
           />
-
-          <FormField
+          <FormFieldWithLabel
             control={form.control}
             name='category'
-            render={({ field }) => (
-              <FormItem className='sm:w-1/2'>
-                <FormLabel>Categoria</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder='Selecione a Categoria' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.values(IongCategory).map((category) => (
-                      <SelectItem key={category} value={category}>
-                        {category}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+            label='Categoria'
+            placeholder='Selecione a Categoria'
+            renderSelect
+            className='sm:w-1/2'
           />
         </div>
         <div className='flex flex-col justify-between gap-4 sm:flex-row'>
-          <FormField
+          <FormFieldWithLabel
             control={form.control}
             name='city'
-            render={({ field }) => (
-              <FormItem className='sm:w-1/2'>
-                <FormLabel>Cidade</FormLabel>
-                <FormControl>
-                  <Input placeholder='Digite a Cidade da Ong' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label='Cidade'
+            placeholder='Digite a Cidade da Ong'
+            className='sm:w-1/2'
           />
-          <FormField
+          <FormFieldWithLabel
             control={form.control}
             name='state'
-            render={({ field }) => (
-              <FormItem className='sm:w-1/2'>
-                <FormLabel>Estado</FormLabel>
-                <FormControl>
-                  <Input placeholder='Digite o Estado da Ong' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label='Estado'
+            placeholder='Digite o Estado da Ong'
+            className='sm:w-1/2'
           />
         </div>
-
-        <FormField
+        <FormFieldWithLabel
           control={form.control}
           name='description'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Descrição</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder='Digite a Descrição da Ong'
-                  className='h-52 resize-none'
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                You can <span>@mention</span> other users and organizations.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+          label='Descrição'
+          placeholder='Digite a Descrição da Ong'
+          textarea
         />
         <Button className='mt-10 w-full' type='submit' disabled={isLoading}>
-          {isLoading ? "Loading..." : "Criar Ong"}
+          {isLoading ? "Loading..." : ong?.id ? "Atualizar Ong" : "Criar Ong"}
         </Button>
       </form>
     </Form>
   );
 };
 
-export default Ongform;
+export default OngForm;

@@ -2,6 +2,7 @@ import { IVolunteer } from "@/app/(private-routes)/(volunteers)/types";
 import { IOng } from "../../(ongs)/types";
 import { IActionResponse } from "./Action.d";
 import { IPagination } from "@/types/Pagination";
+import { IactionCategory } from "../schema/actionSchema";
 
 export type IActionStatus = "pending" | "active" | "completed" | "canceled";
 
@@ -13,7 +14,7 @@ export interface IAction {
   end_date: string;
   status: IActionStatus;
   max_volunteers: number;
-  category: string;
+  category: IactionCategory;
   ong_id: string;
   ong: IOng;
   created_at: string;
@@ -28,10 +29,16 @@ export interface IActionResponse {
 }
 
 export interface IActionResponseUnique {
-  data: IAction;
+  data: IAction | null;
+  error?: string;
 }
 
 export interface ICreateActionResponse {
   message: string;
   data: IAction;
+}
+
+export interface IActionPostOrPatch {
+  data: { message?: string; action: IAction | null };
+  error?: string;
 }

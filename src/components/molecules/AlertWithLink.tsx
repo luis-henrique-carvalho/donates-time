@@ -1,7 +1,8 @@
 import React from "react";
+// Components
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+// Next
 import Link from "next/link";
-
 interface AlertWithLinkProps {
   variant?: "default" | "primary" | "destructive";
   icon: React.ReactNode;

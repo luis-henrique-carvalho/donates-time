@@ -2,18 +2,20 @@
 // Services
 import { ActionService } from "../services/actions.service";
 // Types
-import { ICreateActionResponse } from "../types";
+import { ICreateActionResponse, IActionPostOrPatch } from "../types";
 // Schema
-import { actionFormData } from "./schema";
+import { actionFormData } from "../schema";
 
 export const createAction = async (
   data: actionFormData
-): Promise<ICreateActionResponse | { error: string }> => {
+): Promise<IActionPostOrPatch> => {
   const response = await ActionService.createActionService(data);
 
   if (!response || "error" in response) {
-    return { error: response.error || "Unknown error" };
+    return { data: { action: null }, error: response.error };
   }
 
-  return response;
+  return {
+    data: { action: response.data.action, message: response.data.message },
+  };
 };
