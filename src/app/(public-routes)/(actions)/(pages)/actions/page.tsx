@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import ActionList from "../../components/ActionList";
 import PageContainer from "@/components/layout/PageContainer";
 import { SkeletonCard } from "@/components/molecules/SkeletonCard";
-import Págination from "@/components/molecules/Pagination";
+import PaginationComponent from "@/components/molecules/PaginationComponent";
 import Search from "@/components/molecules/Seach";
 // Actions
 import { fetchActions } from "../../actions";
@@ -25,7 +25,7 @@ const Actions = async ({
   }
 
   return (
-    <PageContainer title='Actions'>
+    <PageContainer title='Ações Disponíveis'>
       <div className='flex flex-grow flex-col gap-4'>
         <Search placeholder={"Pesquise pelo nome da ação"} />
 
@@ -36,7 +36,7 @@ const Actions = async ({
         </div>
 
         <div className='mt-5 flex w-full justify-center'>
-          <Págination pagy={response.pagy} />
+          <PaginationComponent pagy={response.pagy} />
         </div>
       </div>
     </PageContainer>

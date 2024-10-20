@@ -3,8 +3,7 @@
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -16,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { format } from "date-fns";
 import Link from "next/link";
-
 import { IAction } from "@/app/(public-routes)/(actions)/types";
 import { deleteAction } from "@/app/(public-routes)/(actions)/actions";
 import { toast } from "@/components/ui/use-toast";
@@ -97,68 +95,70 @@ export const columns: ColumnDef<IAction>[] = [
     id: "actions",
     header: "Ações",
     enableHiding: true,
-    cell: ({ row }) => {
-      const IAction = row.original;
-      const router = useRouter();
-
-      const handleDelete = async () => {
-        const response = await deleteAction(IAction.id);
-
-        if (response?.error) {
-          console.error(response.error);
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: response.error,
-          });
-          return;
-        }
-
-        toast({
-          variant: "primary",
-          title: "Success",
-          description: "Action deleted successfully",
-        });
-
-        router.refresh();
-      };
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='ghost' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Abrir Menu</span>
-              <MoreHorizontal className='h-4 w-4' />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            <DropdownMenuItem
-              className='cursor-pointer'
-              onClick={() => navigator.clipboard.writeText(IAction.id)}
-            >
-              Copiar ID da ação
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={`/actions/${IAction.id}`} className='w-full'>
-                Ver detalhes
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={`/actions/${IAction.id}/edit`} className='w-full'>
-                Editar
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => handleDelete()}
-              className='mb-1 cursor-pointer bg-destructive text-white hover:bg-destructive/80'
-            >
-              Exluir
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ActionsCell,
   },
 ];
+
+function ActionsCell({ row }: { row: any }) {
+  const IAction = row.original;
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    const response = await deleteAction(IAction.id);
+
+    if (response?.error) {
+      console.error(response.error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: response.error,
+      });
+      return;
+    }
+
+    toast({
+      variant: "primary",
+      title: "Success",
+      description: "Action deleted successfully",
+    });
+
+    router.refresh();
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='ghost' className='h-8 w-8 p-0'>
+          <span className='sr-only'>Abrir Menu</span>
+          <MoreHorizontal className='h-4 w-4' />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end'>
+        <DropdownMenuLabel>Ações</DropdownMenuLabel>
+        <DropdownMenuItem
+          className='cursor-pointer'
+          onClick={() => navigator.clipboard.writeText(IAction.id)}
+        >
+          Copiar ID da ação
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link href={`/actions/${IAction.id}`} className='w-full'>
+            Ver detalhes
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={`/actions/${IAction.id}/edit`} className='w-full'>
+            Editar
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => handleDelete()}
+          className='mb-1 cursor-pointer bg-destructive text-white hover:bg-destructive/80'
+        >
+          Exluir
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

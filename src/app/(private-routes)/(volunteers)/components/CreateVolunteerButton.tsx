@@ -69,7 +69,7 @@ const CreateVolunteerButton: React.FC<Props> = ({ action_id }) => {
             Você tem certeza que deseja se inscrever nesta ação?
           </DialogTitle>
           <DialogDescription>
-            Ao clicar em "Inscreva-se", você estará se se compromentendo a
+            Ao clicar em Inscreva-se, você estará se se compromentendo a
             participar desta ação. Você poderá cancelar a inscrição a qualquer
             momento.
           </DialogDescription>
