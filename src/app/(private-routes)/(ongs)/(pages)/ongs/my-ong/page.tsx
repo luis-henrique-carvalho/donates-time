@@ -19,7 +19,6 @@ const MyOng = async () => {
               <TabsList>
                 <TabsTrigger value='overview'>Visão geral</TabsTrigger>
                 <TabsTrigger value='edit'>Editar</TabsTrigger>
-                <TabsTrigger value='volunteers'>Reports</TabsTrigger>
               </TabsList>
               <TabsContent value='overview' className='space-y-4'>
                 <MyOngOverview ong={ong} />

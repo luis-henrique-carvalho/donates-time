@@ -1,7 +1,8 @@
 import { api } from "@/services/api.service";
-import { IVolunteerResponseUnique } from "../types";
+import { IVolunteerResponse, IVolunteerResponseUnique } from "../types";
 import { getServerSession } from "next-auth";
 import nextAuthOptions from "@/nextAuthOptions";
+import { handleApiError } from "@/utils";
 
 export class VolunteerService {
   static async createVolunteer(
@@ -24,11 +25,25 @@ export class VolunteerService {
 
       return response.data;
     } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.errors ||
-        error.response?.data?.error ||
-        "An error occurred";
-      return { error: errorMessage };
+      return handleApiError(error);
+    }
+  }
+
+  static async getVolunteersByOngId(
+    ong_id: string
+  ): Promise<IVolunteerResponse> {
+    const session = await getServerSession(nextAuthOptions);
+
+    try {
+      const response = await api.get(`/api/v1/ongs/${ong_id}/volunteers`, {
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return handleApiError(error);
     }
   }
 }

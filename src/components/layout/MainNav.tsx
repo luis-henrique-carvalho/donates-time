@@ -30,12 +30,12 @@ const MainNav = ({ session, user }: MainNavProps) => {
       </Link>
       <NavigationMenu>
         <NavigationMenuList className='border-none'>
-          {/* Ongs Menu */}
+
           <NavigationMenuItem>
             <NavigationMenuTrigger>Ongs</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className='grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-2'>
-                <div className={`${!session && "col-span-2 text-center"}`}>
+                <div className={`${!ong && "col-span-2 text-center"}`}>
                   <ListItem title='Listar Ongs' href='/ongs' />
                 </div>
                 {user && (
@@ -51,7 +51,6 @@ const MainNav = ({ session, user }: MainNavProps) => {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          {/* Ação Menu */}
           <NavigationMenuItem>
             <NavigationMenuTrigger>Ação</NavigationMenuTrigger>
             <NavigationMenuContent>

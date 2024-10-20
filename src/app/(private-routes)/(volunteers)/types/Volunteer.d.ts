@@ -14,10 +14,18 @@ export interface IVolunteer {
   user_name: string;
 }
 
-export interface IVolunteerResponse {
-  data: IVolunteer[];
-  pagy: IPagination;
+export interface ISuccessResponse {
+  data: {
+    volunteers: IVolunteer[];
+    pagy: IPagination;
+  };
 }
+
+export interface IErrorResponse {
+  error: string;
+}
+
+export type IVolunteerResponse = ISuccessResponse | IErrorResponse;
 
 export interface IVolunteerResponseUnique {
   data: IVolunteer;

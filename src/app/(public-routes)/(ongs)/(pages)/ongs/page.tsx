@@ -6,7 +6,7 @@ import OngList from "../../components/OngList";
 import PageContainer from "@/components/layout/PageContainer";
 import Search from "@/components/molecules/Seach";
 import { SkeletonCard } from "@/components/molecules/SkeletonCard";
-import Págination from "@/components/molecules/Pagination";
+import PaginationComponent from "@/components/molecules/PaginationComponent";
 // Types
 import { IOngResponse } from "../../types";
 
@@ -38,7 +38,7 @@ const OngsPage = async ({
         </div>
 
         <div className='mt-5 flex w-full justify-center'>
-          <Págination pagy={response.pagy} />
+          <PaginationComponent pagy={response.pagy} />
         </div>
       </div>
     </PageContainer>

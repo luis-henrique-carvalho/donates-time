@@ -15,7 +15,7 @@ interface PaginationProps {
   pagy: IPagination;
 }
 
-export default function Págination({ pagy }: PaginationProps) {
+export default function PaginationComponent({ pagy }: PaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
