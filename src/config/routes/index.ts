@@ -19,3 +19,53 @@ export const configRoutes: ConfigRoutes = {
     { title: "My Ong", href: "/ongs/my-ong" },
   ],
 };
+
+type Data = {
+  navMain: {
+    title: string
+    url: string
+    items?: {
+      title: string
+      url: string
+      isActive?: boolean
+      show?: boolean
+    }[]
+  }[]
+}
+
+export const NavRoutes: Data = {
+  navMain: [
+    {
+      title: "Ongs",
+      url: "/ongs",
+      items: [
+        {
+          title: "Todas as Ongs",
+          url: "/ongs",
+        },
+        {
+          title: "Cadastrar Ong",
+          url: "/ongs/create",
+        },
+        {
+          title: "Minha Ong",
+          url: "/ongs/my-ong",
+        },
+      ],
+    },
+    {
+      title: "Ações",
+      url: "/actions",
+      items: [
+        {
+          title: "Todas as Ações",
+          url: "/actions",
+        },
+        {
+          title: "Cadastrar Ação",
+          url: "/actions/create",
+        },
+      ],
+    },
+  ],
+}

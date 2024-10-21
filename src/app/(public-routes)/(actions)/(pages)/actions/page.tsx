@@ -25,7 +25,7 @@ const Actions = async ({
   }
 
   return (
-    <PageContainer title='Ações Disponíveis'>
+    <PageContainer>
       <div className='flex flex-grow flex-col gap-4'>
         <Search placeholder={"Pesquise pelo nome da ação"} />
 

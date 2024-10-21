@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const Loading = () => {
   return (
-    <PageContainer title='Actions'>
+    <PageContainer>
       <div className='flex flex-grow flex-col gap-4'>
         <Search placeholder={"Pesquise pelo nome da ação"} />
 

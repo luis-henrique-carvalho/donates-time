@@ -11,11 +11,11 @@ const PageContainer = ({ children, title, className }: Props) => {
   return (
     <main
       className={cn(
-        "container flex min-h-screen flex-col gap-4 rounded-xl bg-muted/40 p-4 pb-10 md:gap-8 md:p-8",
+        "flex flex-1 flex-col gap-4 p-4 pt-0",
         className
       )}
     >
-      {title && <h1 className='heading-1'>{title}</h1>}
+      {title && <h1 className='heading-1 text-center'>{title}</h1>}
       <div className='flex flex-grow flex-col'>{children}</div>
     </main>
   );
