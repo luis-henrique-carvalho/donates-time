@@ -4,13 +4,12 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import NextAuthSessionProvider from "@/providers/SessionProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import SiteHeader from "@/components/layout/SiteHeader";
-import Container from "@/components/layout/Container";
 import { Toaster } from "@/components/ui/toaster";
 import { MapProvider } from "@/providers/MapProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import LoadingPage from "@/components/layout/LoadingPage";
 import { Suspense } from "react";
+import SideBar from "@/components/layout/SideBar";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -40,13 +39,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           >
             <Suspense fallback={<LoadingPage />}>
               <MapProvider>
-                <SiteHeader />
-                <Container>
+                <SideBar>
                   {children}
                   <SiteFooter />
-                </Container>
-
-                <Toaster />
+                  <Toaster />
+                </SideBar>
               </MapProvider>
             </Suspense>
           </ThemeProvider>

@@ -29,8 +29,8 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
     <>
       {ong ? (
         <>
-          <div className='flex flex-col xl:container xl:flex-row xl:justify-between'>
-            <main className='flex min-h-[95%] flex-col bg-muted/40 xl:w-7/12 xl:gap-8 xl:p-8'>
+          <div className='flex flex-col xl:flex-row xl:justify-between gap-10'>
+            <main className='flex min-h-[95%] flex-col bg-muted/40 xl:w-8/12 xl:gap-8 xl:p-8'>
               <AspectRatio ratio={12 / 6} className='bg-muted'>
                 <Image
                   src='https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80'
@@ -74,7 +74,7 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
                   <section className='flex w-full flex-col gap-3'>
                     <h4 className='heading-4 text-muted-foreground'>Ações</h4>
                     {actions && actions.length > 0 ? (
-                      <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                      <div className='grid auto-rows-min gap-4 lg:grid-cols-2'>
                         {actions.slice(0, 6).map((action) => (
                           <OngActionCard key={action.id} action={action} />
                         ))}
