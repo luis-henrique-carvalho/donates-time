@@ -23,7 +23,7 @@ const ActionsCreate = async () => {
   }
 
   return (
-    <PageContainer title='Crie Sua Ação'>
+    <PageContainer>
       <div className='flex flex-col gap-4'>
         <AlertWithLink
           variant='primary'

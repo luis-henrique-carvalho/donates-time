@@ -20,7 +20,7 @@ const OngsCreate = async () => {
   }
 
   return (
-    <PageContainer title='Crie Sua Ong'>
+    <PageContainer>
       <div className='flex flex-grow flex-col gap-4'>
         <Ongform />
       </div>

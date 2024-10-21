@@ -19,7 +19,7 @@ import {
 import { NavRoutes } from "@/config/routes";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname(); // Obtém a URL atual
+  const pathname = usePathname();
 
   return (
     <Sidebar variant="floating" {...props}>
@@ -32,8 +32,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Doa</span>
-                  <span className="">v1.0.0</span>
+                  <span className="font-semibold">Doa Tempo</span>
+                  <span className="">Cada minuto importa</span>
                 </div>
               </a>
             </SidebarMenuButton>

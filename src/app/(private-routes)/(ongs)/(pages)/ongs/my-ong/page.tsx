@@ -14,7 +14,7 @@ const MyOng = async () => {
     <>
       {ong ? (
         <>
-          <PageContainer title='Minha Ong'>
+          <PageContainer>
             <Tabs defaultValue='overview' className='space-y-4'>
               <TabsList>
                 <TabsTrigger value='overview'>Visão geral</TabsTrigger>

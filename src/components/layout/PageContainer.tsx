@@ -15,7 +15,7 @@ const PageContainer = ({ children, title, className }: Props) => {
         className
       )}
     >
-      {title && <h1 className='heading-1'>{title}</h1>}
+      {title && <h1 className='heading-1 text-center'>{title}</h1>}
       <div className='flex flex-grow flex-col'>{children}</div>
     </main>
   );
