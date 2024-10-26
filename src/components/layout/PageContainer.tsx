@@ -9,12 +9,7 @@ type Props = {
 
 const PageContainer = ({ children, title, className }: Props) => {
   return (
-    <main
-      className={cn(
-        "flex flex-1 flex-col gap-4 p-4 pt-0",
-        className
-      )}
-    >
+    <main className={cn("flex flex-1 flex-col gap-4 p-4 pt-0", className)}>
       {title && <h1 className='heading-1 text-center'>{title}</h1>}
       <div className='flex flex-grow flex-col'>{children}</div>
     </main>

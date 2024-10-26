@@ -29,7 +29,7 @@ const OngDetails = async ({ params }: { params: { ong_id: string } }) => {
     <>
       {ong ? (
         <>
-          <div className='flex flex-col xl:flex-row xl:justify-between gap-10'>
+          <div className='flex flex-col gap-10 xl:flex-row xl:justify-between'>
             <main className='flex min-h-[95%] flex-col bg-muted/40 xl:w-8/12 xl:gap-8 xl:p-8'>
               <AspectRatio ratio={12 / 6} className='bg-muted'>
                 <Image

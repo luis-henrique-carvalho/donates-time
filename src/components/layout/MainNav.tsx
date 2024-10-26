@@ -30,7 +30,6 @@ const MainNav = ({ session, user }: MainNavProps) => {
       </Link>
       <NavigationMenu>
         <NavigationMenuList className='border-none'>
-
           <NavigationMenuItem>
             <NavigationMenuTrigger>Ongs</NavigationMenuTrigger>
             <NavigationMenuContent>

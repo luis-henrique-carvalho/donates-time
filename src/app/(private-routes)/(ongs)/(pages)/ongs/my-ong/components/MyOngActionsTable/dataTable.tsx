@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -115,9 +115,9 @@ export function DataTable({ data, columns }: Props) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
