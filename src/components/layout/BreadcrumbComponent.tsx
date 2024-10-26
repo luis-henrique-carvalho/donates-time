@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React from 'react'
 import { usePathname } from 'next/navigation';
 import {
     Breadcrumb,
@@ -21,7 +21,7 @@ const BreadcrumbComponent = () => {
 
     const generateBreadcrumbs = (): BreadcrumbItem[] => {
         const breadcrumbs: BreadcrumbItem[] = [];
-        const path = pathname || "/";  // URL atual
+        const path = pathname || "/";
 
         NavRoutes.navMain.forEach((navItem) => {
             if (path.startsWith(navItem.url)) {
